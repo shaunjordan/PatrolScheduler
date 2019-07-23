@@ -27,15 +27,13 @@ namespace PatrolScheduler.Database
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<CapstoneAddress> CapstoneAddress { get; set; }
-        public virtual DbSet<CapstoneCustomer> CapstoneCustomer { get; set; }
-        public virtual DbSet<CapstoneEmployee> CapstoneEmployee { get; set; }
-        public virtual DbSet<CapstoneGuard> CapstoneGuard { get; set; }
-        public virtual DbSet<CapstonePatrol> CapstonePatrol { get; set; }
-        public virtual DbSet<CapstonePatrolCar> CapstonePatrolCar { get; set; }
-        public virtual DbSet<CapstoneUser> CapstoneUser { get; set; }
+        public virtual DbSet<CapstoneCustomer> CapstoneCustomers { get; set; }
+        public virtual DbSet<CapstoneEmployee> CapstoneEmployees { get; set; }
+        public virtual DbSet<CapstonePatrol> CapstonePatrols { get; set; }
+        public virtual DbSet<CapstonePatrolCar> CapstonePatrolCars { get; set; }
+        public virtual DbSet<CapstoneUser> CapstoneUsers { get; set; }
     
-        public virtual ObjectResult<GetUser_Result> GetUser(string uName, string pWord)
+        public virtual ObjectResult<CapstoneUser> GetUser(string uName, string pWord)
         {
             var uNameParameter = uName != null ?
                 new ObjectParameter("uName", uName) :
@@ -45,7 +43,20 @@ namespace PatrolScheduler.Database
                 new ObjectParameter("pWord", pWord) :
                 new ObjectParameter("pWord", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetUser_Result>("GetUser", uNameParameter, pWordParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CapstoneUser>("GetUser", uNameParameter, pWordParameter);
+        }
+    
+        public virtual ObjectResult<CapstoneUser> GetUser(string uName, string pWord, MergeOption mergeOption)
+        {
+            var uNameParameter = uName != null ?
+                new ObjectParameter("uName", uName) :
+                new ObjectParameter("uName", typeof(string));
+    
+            var pWordParameter = pWord != null ?
+                new ObjectParameter("pWord", pWord) :
+                new ObjectParameter("pWord", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CapstoneUser>("GetUser", mergeOption, uNameParameter, pWordParameter);
         }
     }
 }

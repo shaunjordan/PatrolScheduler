@@ -1,6 +1,7 @@
 ﻿using PatrolScheduler.Database;
 using PatrolScheduler.Services;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 
 namespace PatrolScheduler.ViewModel
 {
@@ -16,9 +17,9 @@ namespace PatrolScheduler.ViewModel
             _customerDataService = customerDataService;
         }
 
-        public void Load()
+        public async Task LoadAsync()
         {
-            var customers = _customerDataService.GetAllCustomers();
+            var customers = await _customerDataService.GetAllCustomersAsync();
 
             CapstoneCustomers.Clear();
 

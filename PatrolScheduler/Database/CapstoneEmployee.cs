@@ -17,18 +17,17 @@ namespace PatrolScheduler.Database
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public CapstoneEmployee()
         {
-            this.CapstonePatrol = new HashSet<CapstonePatrol>();
-            this.CapstoneGuard = new HashSet<CapstoneGuard>();
+            this.CapstonePatrols = new HashSet<CapstonePatrol>();
         }
     
         public int EmployeeId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public Nullable<System.DateTime> HireDate { get; set; }
+        public Nullable<int> BadgeNumber { get; set; }
+        public Nullable<int> PatrolCar { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CapstonePatrol> CapstonePatrol { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CapstoneGuard> CapstoneGuard { get; set; }
+        public virtual ICollection<CapstonePatrol> CapstonePatrols { get; set; }
     }
 }

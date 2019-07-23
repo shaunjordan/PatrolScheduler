@@ -1,4 +1,5 @@
-﻿using PatrolScheduler.ViewModel;
+﻿using PatrolScheduler.Database;
+using PatrolScheduler.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,9 +34,34 @@ namespace PatrolScheduler
             Loaded += MainWindow_Loaded;
         }
 
-        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        private async void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            _mainViewModel.Load();
+            await _mainViewModel.LoadAsync();
+        }
+
+        //private void Button_Click(object sender, RoutedEventArgs e)
+        //{
+        //    using (var context = new CapstoneDatabase())
+        //    {
+
+        //        var result = context.GetUser("test", "test");
+
+        //        if (result != null)
+        //        {
+        //            MessageBox.Show(result.ToString());
+        //        }
+        //        else
+        //        {
+        //            MessageBox.Show("Invalid Username or Password");
+        //        }
+        //    }
+        //}
+
+        protected override void OnClosed(EventArgs e)
+        {
+            base.OnClosed(e);
+
+            Application.Current.Shutdown();
         }
     }
 }

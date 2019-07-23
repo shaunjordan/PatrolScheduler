@@ -1,20 +1,34 @@
 ﻿using PatrolScheduler.Database;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace PatrolScheduler.Services
 {
+    /*
+     
+        CapstoneDatabse is registered with Bootstrap as dependency injection
+         
+    */
+
     public class CustomerDataService : ICustomerDataService
     {
-        public IEnumerable<CapstoneCustomer> GetAllCustomers()
+        private Func<CapstoneDatabase> _capstoneDbContext;
+
+        public CustomerDataService(Func<CapstoneDatabase> capstoneDbContext)
         {
-            //yield return new CapstoneCustomer { CustomerId = 1, CustomerName = "Test These Industries" };
-            using (var context = new CapstoneDatabase())
+            _capstoneDbContext = capstoneDbContext;
+        }
+                
+
+        public async Task<List<CapstoneCustomer>> GetAllCustomersAsync()
+        {          
+            using (var context = _capstoneDbContext())
             {
-                return context.CapstoneCustomer.AsNoTracking().ToList();
+                return await context.CapstoneCustomers.AsNoTracking().ToListAsync();
             }
         }
     }

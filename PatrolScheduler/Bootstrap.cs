@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using PatrolScheduler.Database;
 using PatrolScheduler.Services;
 using PatrolScheduler.ViewModel;
 using System;
@@ -18,6 +19,8 @@ namespace PatrolScheduler
             builder.RegisterType<MainWindow>().AsSelf();
             builder.RegisterType<MainViewModel>().AsSelf();
             builder.RegisterType<CustomerDataService>().As<ICustomerDataService>();
+
+            builder.RegisterType<CapstoneDatabase>().AsSelf();
 
             return builder.Build();
 

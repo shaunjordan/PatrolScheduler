@@ -14,16 +14,7 @@ namespace PatrolScheduler.Database
     
     public partial class CapstonePatrolCar
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public CapstonePatrolCar()
-        {
-            this.CapstoneGuard = new HashSet<CapstoneGuard>();
-        }
-    
         public int CarId { get; set; }
         public string VIN { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CapstoneGuard> CapstoneGuard { get; set; }
     }
 }

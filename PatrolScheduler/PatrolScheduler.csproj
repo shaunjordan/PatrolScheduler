@@ -82,44 +82,38 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Bootstrap.cs" />
-    <Compile Include="Database\CapstoneAddress.cs">
-      <DependentUpon>CapstoneDatabse.tt</DependentUpon>
-    </Compile>
     <Compile Include="Database\CapstoneCustomer.cs">
-      <DependentUpon>CapstoneDatabse.tt</DependentUpon>
+      <DependentUpon>CapstoneDatabase.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\CapstoneDatabse.Context.cs">
+    <Compile Include="Database\CapstoneDatabase.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>CapstoneDatabse.Context.tt</DependentUpon>
+      <DependentUpon>CapstoneDatabase.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\CapstoneDatabse.cs">
+    <Compile Include="Database\CapstoneDatabase.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>CapstoneDatabse.tt</DependentUpon>
+      <DependentUpon>CapstoneDatabase.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\CapstoneDatabse.Designer.cs">
+    <Compile Include="Database\CapstoneDatabase.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>CapstoneDatabse.edmx</DependentUpon>
+      <DependentUpon>CapstoneDatabase.edmx</DependentUpon>
     </Compile>
     <Compile Include="Database\CapstoneEmployee.cs">
-      <DependentUpon>CapstoneDatabse.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Database\CapstoneGuard.cs">
-      <DependentUpon>CapstoneDatabse.tt</DependentUpon>
+      <DependentUpon>CapstoneDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\CapstonePatrol.cs">
-      <DependentUpon>CapstoneDatabse.tt</DependentUpon>
+      <DependentUpon>CapstoneDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\CapstonePatrolCar.cs">
-      <DependentUpon>CapstoneDatabse.tt</DependentUpon>
+      <DependentUpon>CapstoneDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\CapstoneUser.cs">
-      <DependentUpon>CapstoneDatabse.tt</DependentUpon>
+      <DependentUpon>CapstoneDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\GetUser_Result.cs">
-      <DependentUpon>CapstoneDatabse.tt</DependentUpon>
+      <DependentUpon>CapstoneDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="Services\CustomerDataService.cs" />
     <Compile Include="Services\EmployeeDataService.cs" />
@@ -127,13 +121,15 @@
     <Compile Include="Services\LoginDataService.cs" />
     <Compile Include="ViewModels\BaseNotify.cs" />
     <Compile Include="ViewModels\EmployeeViewModel.cs" />
-    <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="Views\CustomerViewModel.xaml.cs">
+      <DependentUpon>CustomerViewModel.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\EmployeeView.xaml.cs">
       <DependentUpon>EmployeeView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\LoginView.xaml.cs">
-      <DependentUpon>LoginView.xaml</DependentUpon>
+    <Compile Include="Views\LoginWindow.xaml.cs">
+      <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -147,11 +143,15 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\CustomerViewModel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\EmployeeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\LoginView.xaml">
+    <Page Include="Views\LoginWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -174,12 +174,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="Database\CapstoneDatabse.edmx">
+    <EntityDeploy Include="Database\CapstoneDatabase.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>CapstoneDatabse.Designer.cs</LastGenOutput>
+      <LastGenOutput>CapstoneDatabase.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Database\CapstoneDatabse.edmx.diagram">
-      <DependentUpon>CapstoneDatabse.edmx</DependentUpon>
+    <None Include="Database\CapstoneDatabase.edmx.diagram">
+      <DependentUpon>CapstoneDatabase.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -193,22 +193,22 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Database\CapstoneDatabse.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CapstoneDatabse.edmx</DependentUpon>
-      <LastGenOutput>CapstoneDatabse.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Database\CapstoneDatabse.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CapstoneDatabse.edmx</DependentUpon>
-      <LastGenOutput>CapstoneDatabse.cs</LastGenOutput>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Database\CapstoneDatabase.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CapstoneDatabase.edmx</DependentUpon>
+      <LastGenOutput>CapstoneDatabase.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Database\CapstoneDatabase.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CapstoneDatabase.edmx</DependentUpon>
+      <LastGenOutput>CapstoneDatabase.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

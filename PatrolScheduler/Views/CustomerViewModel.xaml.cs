@@ -16,13 +16,15 @@ using System.Windows.Shapes;
 namespace PatrolScheduler.Views
 {
     /// <summary>
-    /// Interaction logic for LoginView.xaml
+    /// Interaction logic for CustomerViewModel.xaml
     /// </summary>
-    public partial class LoginView : UserControl
+    public partial class CustomerViewModel : UserControl
     {
-        public LoginView()
+        public CustomerViewModel()
         {
-            InitializeComponent();
+            InitializeComponent();            
         }
+
+
     }
 }
