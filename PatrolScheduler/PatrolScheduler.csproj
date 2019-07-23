@@ -35,8 +35,34 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=4.9.2.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.9.2\lib\net45\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data, Version=6.8.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.6.8.8\lib\net45\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data.Entity.EF5, Version=6.8.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Program Files (x86)\MySQL\MySQL Connector Net 6.8.8\Assemblies\v4.5\MySql.Data.Entity.EF5.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data.Entity.EF6, Version=6.8.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.Entity.6.8.8\lib\net45\MySql.Data.Entity.EF6.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Web, Version=6.8.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Program Files (x86)\MySQL\MySQL Connector Net 6.8.8\Assemblies\v4.5\MySql.Web.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -55,6 +81,58 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Database\CapstoneAddress.cs">
+      <DependentUpon>CapstoneDatabse.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\CapstoneCustomer.cs">
+      <DependentUpon>CapstoneDatabse.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\CapstoneDatabse.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CapstoneDatabse.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\CapstoneDatabse.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CapstoneDatabse.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\CapstoneDatabse.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CapstoneDatabse.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Database\CapstoneEmployee.cs">
+      <DependentUpon>CapstoneDatabse.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\CapstoneGuard.cs">
+      <DependentUpon>CapstoneDatabse.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\CapstonePatrol.cs">
+      <DependentUpon>CapstoneDatabse.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\CapstonePatrolCar.cs">
+      <DependentUpon>CapstoneDatabse.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\CapstoneUser.cs">
+      <DependentUpon>CapstoneDatabse.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\GetUser_Result.cs">
+      <DependentUpon>CapstoneDatabse.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Services\CustomerDataService.cs" />
+    <Compile Include="Services\EmployeeDataService.cs" />
+    <Compile Include="Services\ICustomerDataService.cs" />
+    <Compile Include="ViewModels\BaseNotify.cs" />
+    <Compile Include="ViewModels\EmployeeViewModel.cs" />
+    <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="Views\EmployeeView.xaml.cs">
+      <DependentUpon>EmployeeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LoginView.xaml.cs">
+      <DependentUpon>LoginView.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -67,6 +145,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\EmployeeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LoginView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -86,13 +172,41 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EntityDeploy Include="Database\CapstoneDatabse.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>CapstoneDatabse.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Database\CapstoneDatabse.edmx.diagram">
+      <DependentUpon>CapstoneDatabse.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Database\CapstoneDatabse.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CapstoneDatabse.edmx</DependentUpon>
+      <LastGenOutput>CapstoneDatabse.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Database\CapstoneDatabse.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CapstoneDatabse.edmx</DependentUpon>
+      <LastGenOutput>CapstoneDatabse.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

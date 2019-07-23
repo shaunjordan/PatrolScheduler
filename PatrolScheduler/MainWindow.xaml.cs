@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PatrolScheduler.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,21 @@ namespace PatrolScheduler
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        private MainViewModel _mainViewModel;
+
+        public MainWindow(MainViewModel viewModel)
         {
             InitializeComponent();
+
+            _mainViewModel = viewModel;
+
+            DataContext = _mainViewModel;
+            Loaded += MainWindow_Loaded;
+        }
+
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            _mainViewModel.Load();
         }
     }
 }

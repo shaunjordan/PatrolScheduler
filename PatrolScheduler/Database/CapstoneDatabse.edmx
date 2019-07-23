@@ -1,0 +1,441 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="U05FdzModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CapstoneAddress">
+          <Key>
+            <PropertyRef Name="AddressId" />
+          </Key>
+          <Property Name="AddressId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Address1" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="Address2" Type="varchar" MaxLength="45" />
+          <Property Name="City" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="ZipCode" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="State" Type="varchar" MaxLength="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CapstoneCustomer">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerName" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="AddressId" Type="int" />
+        </EntityType>
+        <EntityType Name="CapstoneEmployee">
+          <Key>
+            <PropertyRef Name="EmployeeId" />
+          </Key>
+          <Property Name="EmployeeId" Type="int" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="HireDate" Type="date" />
+        </EntityType>
+        <EntityType Name="CapstoneGuard">
+          <Key>
+            <PropertyRef Name="BadgeNumber" />
+          </Key>
+          <Property Name="BadgeNumber" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeId" Type="int" Nullable="false" />
+          <Property Name="PatrolCar" Type="int" />
+        </EntityType>
+        <EntityType Name="CapstonePatrol">
+          <Key>
+            <PropertyRef Name="PatrolId" />
+          </Key>
+          <Property Name="PatrolId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeId" Type="int" />
+          <Property Name="CustomerId" Type="int" />
+          <Property Name="PatrolStart" Type="datetime" Precision="0" />
+          <Property Name="PatrolEnd" Type="datetime" Precision="0" />
+        </EntityType>
+        <EntityType Name="CapstonePatrolCar">
+          <Key>
+            <PropertyRef Name="CarId" />
+          </Key>
+          <Property Name="CarId" Type="int" Nullable="false" />
+          <Property Name="VIN" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CapstoneUser">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="256" />
+          <Property Name="IsAdmin" Type="bool" />
+        </EntityType>
+        <Association Name="AddressId">
+          <End Role="CapstoneAddress" Type="Self.CapstoneAddress" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CapstoneCustomer" Type="Self.CapstoneCustomer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CapstoneAddress">
+              <PropertyRef Name="AddressId" />
+            </Principal>
+            <Dependent Role="CapstoneCustomer">
+              <PropertyRef Name="AddressId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CapstonePatrol_ibfk_1">
+          <End Role="CapstoneEmployee" Type="Self.CapstoneEmployee" Multiplicity="0..1" />
+          <End Role="CapstonePatrol" Type="Self.CapstonePatrol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CapstoneEmployee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="CapstonePatrol">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CapstonePatrol_ibfk_2">
+          <End Role="CapstoneCustomer" Type="Self.CapstoneCustomer" Multiplicity="0..1" />
+          <End Role="CapstonePatrol" Type="Self.CapstonePatrol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CapstoneCustomer">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="CapstonePatrol">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EmployeeId">
+          <End Role="CapstoneEmployee" Type="Self.CapstoneEmployee" Multiplicity="1" />
+          <End Role="CapstoneGuard" Type="Self.CapstoneGuard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CapstoneEmployee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="CapstoneGuard">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PatrolCar">
+          <End Role="CapstonePatrolCar" Type="Self.CapstonePatrolCar" Multiplicity="0..1" />
+          <End Role="CapstoneGuard" Type="Self.CapstoneGuard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CapstonePatrolCar">
+              <PropertyRef Name="CarId" />
+            </Principal>
+            <Dependent Role="CapstoneGuard">
+              <PropertyRef Name="PatrolCar" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="GetUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="U05Fdz">
+          <Parameter Name="uName" Type="varchar" Mode="In" />
+          <Parameter Name="pWord" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="U05FdzModelStoreContainer">
+          <EntitySet Name="CapstoneAddress" EntityType="Self.CapstoneAddress" Schema="U05Fdz" store:Type="Tables" />
+          <EntitySet Name="CapstoneCustomer" EntityType="Self.CapstoneCustomer" Schema="U05Fdz" store:Type="Tables" />
+          <EntitySet Name="CapstoneEmployee" EntityType="Self.CapstoneEmployee" Schema="U05Fdz" store:Type="Tables" />
+          <EntitySet Name="CapstoneGuard" EntityType="Self.CapstoneGuard" Schema="U05Fdz" store:Type="Tables" />
+          <EntitySet Name="CapstonePatrol" EntityType="Self.CapstonePatrol" Schema="U05Fdz" store:Type="Tables" />
+          <EntitySet Name="CapstonePatrolCar" EntityType="Self.CapstonePatrolCar" Schema="U05Fdz" store:Type="Tables" />
+          <EntitySet Name="CapstoneUser" EntityType="Self.CapstoneUser" Schema="U05Fdz" store:Type="Tables" />
+          <AssociationSet Name="AddressId" Association="Self.AddressId">
+            <End Role="CapstoneAddress" EntitySet="CapstoneAddress" />
+            <End Role="CapstoneCustomer" EntitySet="CapstoneCustomer" />
+          </AssociationSet>
+          <AssociationSet Name="CapstonePatrol_ibfk_1" Association="Self.CapstonePatrol_ibfk_1">
+            <End Role="CapstoneEmployee" EntitySet="CapstoneEmployee" />
+            <End Role="CapstonePatrol" EntitySet="CapstonePatrol" />
+          </AssociationSet>
+          <AssociationSet Name="CapstonePatrol_ibfk_2" Association="Self.CapstonePatrol_ibfk_2">
+            <End Role="CapstoneCustomer" EntitySet="CapstoneCustomer" />
+            <End Role="CapstonePatrol" EntitySet="CapstonePatrol" />
+          </AssociationSet>
+          <AssociationSet Name="EmployeeId" Association="Self.EmployeeId">
+            <End Role="CapstoneEmployee" EntitySet="CapstoneEmployee" />
+            <End Role="CapstoneGuard" EntitySet="CapstoneGuard" />
+          </AssociationSet>
+          <AssociationSet Name="PatrolCar" Association="Self.PatrolCar">
+            <End Role="CapstonePatrolCar" EntitySet="CapstonePatrolCar" />
+            <End Role="CapstoneGuard" EntitySet="CapstoneGuard" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="U05FdzModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CapstoneAddress">
+          <Key>
+            <PropertyRef Name="AddressId" />
+          </Key>
+          <Property Name="AddressId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Address1" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Address2" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ZipCode" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="State" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="CapstoneCustomer" Relationship="Self.AddressId" FromRole="CapstoneAddress" ToRole="CapstoneCustomer" />
+        </EntityType>
+        <EntityType Name="CapstoneCustomer">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AddressId" Type="Int32" />
+          <NavigationProperty Name="CapstoneAddress" Relationship="Self.AddressId" FromRole="CapstoneCustomer" ToRole="CapstoneAddress" />
+          <NavigationProperty Name="CapstonePatrol" Relationship="Self.CapstonePatrol_ibfk_2" FromRole="CapstoneCustomer" ToRole="CapstonePatrol" />
+        </EntityType>
+        <EntityType Name="CapstoneEmployee">
+          <Key>
+            <PropertyRef Name="EmployeeId" />
+          </Key>
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="HireDate" Type="DateTime" />
+          <NavigationProperty Name="CapstonePatrol" Relationship="Self.CapstonePatrol_ibfk_1" FromRole="CapstoneEmployee" ToRole="CapstonePatrol" />
+          <NavigationProperty Name="CapstoneGuard" Relationship="Self.EmployeeId" FromRole="CapstoneEmployee" ToRole="CapstoneGuard" />
+        </EntityType>
+        <EntityType Name="CapstoneGuard">
+          <Key>
+            <PropertyRef Name="BadgeNumber" />
+          </Key>
+          <Property Name="BadgeNumber" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="PatrolCar" Type="Int32" />
+          <NavigationProperty Name="CapstoneEmployee" Relationship="Self.EmployeeId" FromRole="CapstoneGuard" ToRole="CapstoneEmployee" />
+          <NavigationProperty Name="CapstonePatrolCar" Relationship="Self.PatrolCar" FromRole="CapstoneGuard" ToRole="CapstonePatrolCar" />
+        </EntityType>
+        <EntityType Name="CapstonePatrol">
+          <Key>
+            <PropertyRef Name="PatrolId" />
+          </Key>
+          <Property Name="PatrolId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeId" Type="Int32" />
+          <Property Name="CustomerId" Type="Int32" />
+          <Property Name="PatrolStart" Type="DateTime" />
+          <Property Name="PatrolEnd" Type="DateTime" />
+          <NavigationProperty Name="CapstoneCustomer" Relationship="Self.CapstonePatrol_ibfk_2" FromRole="CapstonePatrol" ToRole="CapstoneCustomer" />
+          <NavigationProperty Name="CapstoneEmployee" Relationship="Self.CapstonePatrol_ibfk_1" FromRole="CapstonePatrol" ToRole="CapstoneEmployee" />
+        </EntityType>
+        <EntityType Name="CapstonePatrolCar">
+          <Key>
+            <PropertyRef Name="CarId" />
+          </Key>
+          <Property Name="CarId" Type="Int32" Nullable="false" />
+          <Property Name="VIN" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="CapstoneGuard" Relationship="Self.PatrolCar" FromRole="CapstonePatrolCar" ToRole="CapstoneGuard" />
+        </EntityType>
+        <EntityType Name="CapstoneUser">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="IsAdmin" Type="Boolean" />
+        </EntityType>
+        <Association Name="AddressId">
+          <End Role="CapstoneAddress" Type="Self.CapstoneAddress" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CapstoneCustomer" Type="Self.CapstoneCustomer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CapstoneAddress">
+              <PropertyRef Name="AddressId" />
+            </Principal>
+            <Dependent Role="CapstoneCustomer">
+              <PropertyRef Name="AddressId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CapstonePatrol_ibfk_2">
+          <End Role="CapstoneCustomer" Type="Self.CapstoneCustomer" Multiplicity="0..1" />
+          <End Role="CapstonePatrol" Type="Self.CapstonePatrol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CapstoneCustomer">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="CapstonePatrol">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CapstonePatrol_ibfk_1">
+          <End Role="CapstoneEmployee" Type="Self.CapstoneEmployee" Multiplicity="0..1" />
+          <End Role="CapstonePatrol" Type="Self.CapstonePatrol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CapstoneEmployee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="CapstonePatrol">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EmployeeId">
+          <End Role="CapstoneEmployee" Type="Self.CapstoneEmployee" Multiplicity="1" />
+          <End Role="CapstoneGuard" Type="Self.CapstoneGuard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CapstoneEmployee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="CapstoneGuard">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PatrolCar">
+          <End Role="CapstonePatrolCar" Type="Self.CapstonePatrolCar" Multiplicity="0..1" />
+          <End Role="CapstoneGuard" Type="Self.CapstoneGuard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CapstonePatrolCar">
+              <PropertyRef Name="CarId" />
+            </Principal>
+            <Dependent Role="CapstoneGuard">
+              <PropertyRef Name="PatrolCar" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CapstoneDatabase" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CapstoneAddress" EntityType="Self.CapstoneAddress" />
+          <EntitySet Name="CapstoneCustomer" EntityType="Self.CapstoneCustomer" />
+          <EntitySet Name="CapstoneEmployee" EntityType="Self.CapstoneEmployee" />
+          <EntitySet Name="CapstoneGuard" EntityType="Self.CapstoneGuard" />
+          <EntitySet Name="CapstonePatrol" EntityType="Self.CapstonePatrol" />
+          <EntitySet Name="CapstonePatrolCar" EntityType="Self.CapstonePatrolCar" />
+          <EntitySet Name="CapstoneUser" EntityType="Self.CapstoneUser" />
+          <AssociationSet Name="AddressId" Association="Self.AddressId">
+            <End Role="CapstoneAddress" EntitySet="CapstoneAddress" />
+            <End Role="CapstoneCustomer" EntitySet="CapstoneCustomer" />
+          </AssociationSet>
+          <AssociationSet Name="CapstonePatrol_ibfk_2" Association="Self.CapstonePatrol_ibfk_2">
+            <End Role="CapstoneCustomer" EntitySet="CapstoneCustomer" />
+            <End Role="CapstonePatrol" EntitySet="CapstonePatrol" />
+          </AssociationSet>
+          <AssociationSet Name="CapstonePatrol_ibfk_1" Association="Self.CapstonePatrol_ibfk_1">
+            <End Role="CapstoneEmployee" EntitySet="CapstoneEmployee" />
+            <End Role="CapstonePatrol" EntitySet="CapstonePatrol" />
+          </AssociationSet>
+          <AssociationSet Name="EmployeeId" Association="Self.EmployeeId">
+            <End Role="CapstoneEmployee" EntitySet="CapstoneEmployee" />
+            <End Role="CapstoneGuard" EntitySet="CapstoneGuard" />
+          </AssociationSet>
+          <AssociationSet Name="PatrolCar" Association="Self.PatrolCar">
+            <End Role="CapstonePatrolCar" EntitySet="CapstonePatrolCar" />
+            <End Role="CapstoneGuard" EntitySet="CapstoneGuard" />
+          </AssociationSet>
+          <FunctionImport Name="GetUser" ReturnType="Collection(U05FdzModel.GetUser_Result)">
+            <Parameter Name="uName" Mode="In" Type="String" />
+            <Parameter Name="pWord" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="GetUser_Result" />
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="U05FdzModelStoreContainer" CdmEntityContainer="CapstoneDatabase">
+          <EntitySetMapping Name="CapstoneAddress">
+            <EntityTypeMapping TypeName="U05FdzModel.CapstoneAddress">
+              <MappingFragment StoreEntitySet="CapstoneAddress">
+                <ScalarProperty Name="AddressId" ColumnName="AddressId" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="State" ColumnName="State" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CapstoneCustomer">
+            <EntityTypeMapping TypeName="U05FdzModel.CapstoneCustomer">
+              <MappingFragment StoreEntitySet="CapstoneCustomer">
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="AddressId" ColumnName="AddressId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CapstoneEmployee">
+            <EntityTypeMapping TypeName="U05FdzModel.CapstoneEmployee">
+              <MappingFragment StoreEntitySet="CapstoneEmployee">
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="HireDate" ColumnName="HireDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CapstoneGuard">
+            <EntityTypeMapping TypeName="U05FdzModel.CapstoneGuard">
+              <MappingFragment StoreEntitySet="CapstoneGuard">
+                <ScalarProperty Name="BadgeNumber" ColumnName="BadgeNumber" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="PatrolCar" ColumnName="PatrolCar" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CapstonePatrol">
+            <EntityTypeMapping TypeName="U05FdzModel.CapstonePatrol">
+              <MappingFragment StoreEntitySet="CapstonePatrol">
+                <ScalarProperty Name="PatrolId" ColumnName="PatrolId" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="PatrolStart" ColumnName="PatrolStart" />
+                <ScalarProperty Name="PatrolEnd" ColumnName="PatrolEnd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CapstonePatrolCar">
+            <EntityTypeMapping TypeName="U05FdzModel.CapstonePatrolCar">
+              <MappingFragment StoreEntitySet="CapstonePatrolCar">
+                <ScalarProperty Name="CarId" ColumnName="CarId" />
+                <ScalarProperty Name="VIN" ColumnName="VIN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CapstoneUser">
+            <EntityTypeMapping TypeName="U05FdzModel.CapstoneUser">
+              <MappingFragment StoreEntitySet="CapstoneUser">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetUser" FunctionName="U05FdzModel.Store.GetUser">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="U05FdzModel.GetUser_Result" />
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
