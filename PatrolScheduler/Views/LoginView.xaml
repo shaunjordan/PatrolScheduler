@@ -13,12 +13,20 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Label Grid.Column="1" Grid.Row="1" Content="User Name"/>
-        <TextBox Grid.Column="1" Grid.Row="1" Height="40"></TextBox>
+        <Label Grid.Column="1" Grid.Row="1" Content="User Name" VerticalAlignment="Center"/>
+        <TextBox Grid.Column="1" Grid.Row="2"></TextBox>
+
+        <Label Grid.Column="1" Grid.Row="3" Content="Password"/>
+        <TextBox Grid.Column="1" Grid.Row="4"></TextBox>
+
+        <Button Grid.Column="1" Grid.Row="5" Content="Login"/>
     </Grid>
     
 </UserControl>

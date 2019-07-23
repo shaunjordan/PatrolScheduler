@@ -9,7 +9,7 @@ namespace PatrolScheduler.Services
 {
     public class CustomerDataService : ICustomerDataService
     {
-        public List<CapstoneCustomer> GetAllCustomers()
+        public IEnumerable<CapstoneCustomer> GetAllCustomers()
         {
             //yield return new CapstoneCustomer { CustomerId = 1, CustomerName = "Test These Industries" };
             using (var context = new CapstoneDatabase())

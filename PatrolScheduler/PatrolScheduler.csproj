@@ -81,6 +81,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Bootstrap.cs" />
     <Compile Include="Database\CapstoneAddress.cs">
       <DependentUpon>CapstoneDatabse.tt</DependentUpon>
     </Compile>
@@ -123,6 +124,7 @@
     <Compile Include="Services\CustomerDataService.cs" />
     <Compile Include="Services\EmployeeDataService.cs" />
     <Compile Include="Services\ICustomerDataService.cs" />
+    <Compile Include="Services\LoginDataService.cs" />
     <Compile Include="ViewModels\BaseNotify.cs" />
     <Compile Include="ViewModels\EmployeeViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />

@@ -1,4 +1,5 @@
-﻿using PatrolScheduler.Services;
+﻿using Autofac;
+using PatrolScheduler.Services;
 using PatrolScheduler.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,12 @@ namespace PatrolScheduler
     {
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            var mainWindow = new MainWindow(new MainViewModel(new CustomerDataService()));
+
+            var bootstrap = new Bootstrap();
+            var container = bootstrap.Bootstrapper();
+
+            var mainWindow = container.Resolve<MainWindow>();
+           
 
             mainWindow.Show();
         }

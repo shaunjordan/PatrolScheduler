@@ -5,6 +5,6 @@ namespace PatrolScheduler.Services
 {
     public interface ICustomerDataService
     {
-        List<CapstoneCustomer> GetAllCustomers();
+        IEnumerable<CapstoneCustomer> GetAllCustomers();
     }
 }
