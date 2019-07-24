@@ -31,12 +31,12 @@ namespace PatrolScheduler
             _mainViewModel = viewModel;
 
             DataContext = _mainViewModel;
-            Loaded += MainWindow_Loaded;
+            //Loaded += MainWindow_Loaded;
         }
 
         private async void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            await _mainViewModel.LoadAsync();
+            //await _mainViewModel.LoadAsync();
         }
 
         //private void Button_Click(object sender, RoutedEventArgs e)

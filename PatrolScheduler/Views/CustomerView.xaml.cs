@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PatrolScheduler.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,15 +17,23 @@ using System.Windows.Shapes;
 namespace PatrolScheduler.Views
 {
     /// <summary>
-    /// Interaction logic for CustomerViewModel.xaml
+    /// Interaction logic for CustomerView.xaml
     /// </summary>
-    public partial class CustomerViewModel : UserControl
+    public partial class CustomerView : UserControl
     {
-        public CustomerViewModel()
+        private CustomerViewModel _customerViewModel;
+
+        public CustomerView(CustomerViewModel customerViewModel)
         {
-            InitializeComponent();            
+            InitializeComponent();
+
+            _customerViewModel = customerViewModel;
+
+            DataContext = _customerViewModel;
+                        
         }
 
+       
 
     }
 }
