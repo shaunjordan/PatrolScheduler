@@ -115,9 +115,11 @@
     <Compile Include="Database\GetUser_Result.cs">
       <DependentUpon>CapstoneDatabase.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Lookup.cs" />
     <Compile Include="RelayCommand.cs" />
     <Compile Include="Services\CustomerDataService.cs" />
     <Compile Include="Services\EmployeeDataService.cs" />
+    <Compile Include="Services\GetCustomerData.cs" />
     <Compile Include="Services\ICustomerDataService.cs" />
     <Compile Include="Services\LoginDataService.cs" />
     <Compile Include="ViewModels\BaseNotify.cs" />
@@ -197,9 +199,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Database\CapstoneDatabase.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

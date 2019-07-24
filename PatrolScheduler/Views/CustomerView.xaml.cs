@@ -1,4 +1,6 @@
-﻿using PatrolScheduler.ViewModels;
+﻿using PatrolScheduler.Database;
+using PatrolScheduler.Services;
+using PatrolScheduler.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,19 +23,46 @@ namespace PatrolScheduler.Views
     /// </summary>
     public partial class CustomerView : UserControl
     {
+        private ICustomerDataService CustomerDataService;
         private CustomerViewModel _customerViewModel;
 
-        public CustomerView(CustomerViewModel customerViewModel)
+
+        public CustomerView(ICustomerDataService _customerDataService)
         {
             InitializeComponent();
+            CustomerDataService = _customerDataService;
 
-            _customerViewModel = customerViewModel;
+            _customerViewModel = new CustomerViewModel(CustomerDataService);
+            this.DataContext = _customerViewModel;
 
-            DataContext = _customerViewModel;
-                        
+            //_customerViewModel = customerViewModel;
+
+            //CustomerViewModel _customerViewModel = new CustomerViewModel();
+
+            //DataContext = _customerViewModel;
+
+
+            Loaded += CustomerView_Loaded;
         }
 
-       
+        private async void CustomerView_Loaded(object sender, RoutedEventArgs e)
+        {
+            await _customerViewModel.LoadAsync();
+            
+        }
+
+
+        //public CustomerView(CustomerViewModel customerViewModel)
+        //{
+        //    InitializeComponent();
+
+        //    _customerViewModel = customerViewModel;
+
+        //    DataContext = _customerViewModel;
+
+        //}
+
+
 
     }
 }

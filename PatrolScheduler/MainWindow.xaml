@@ -4,8 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PatrolScheduler"
+        xmlns:viewmodels="clr-namespace:PatrolScheduler.ViewModels"
+        xmlns:views="clr-namespace:PatrolScheduler.Views"
         mc:Ignorable="d"
         Title="PatrolScheduler" Height="450" Width="800">
+    <Window.Resources>
+        <DataTemplate x:Name="customerViewTemplate" DataType="{x:Type viewmodels:CustomerViewModel}">
+            <views:CustomerView DataContext="{Binding}"/>
+        </DataTemplate>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -15,7 +22,7 @@
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="_File"/>
                 <MenuItem Header="Manage">
-                    <MenuItem Header="Customers"/>
+                    <MenuItem Header="Customers" Command="{Binding SelectCustomerView}"/>
                     <MenuItem Header="Employees"/>
                     <MenuItem Header="Patrol Schedules"/>
                     <MenuItem Header="Patrol Cars"/>
@@ -23,7 +30,7 @@
             </Menu>
 
         </DockPanel>
-        <ContentControl x:Name="ContentControl" Grid.Row="1">
+        <ContentControl Content="{Binding SelectedView}" x:Name="ContentControl" Grid.Row="1">
 
         </ContentControl>
     </Grid>

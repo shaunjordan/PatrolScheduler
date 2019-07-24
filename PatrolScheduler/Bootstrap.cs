@@ -2,6 +2,7 @@
 using PatrolScheduler.Database;
 using PatrolScheduler.Services;
 using PatrolScheduler.ViewModel;
+using PatrolScheduler.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,7 @@ namespace PatrolScheduler
             builder.RegisterType<MainViewModel>().AsSelf();
             builder.RegisterType<CustomerDataService>().As<ICustomerDataService>();
 
+            builder.RegisterType<CustomerViewModel>().AsSelf();
             builder.RegisterType<CapstoneDatabase>().AsSelf();
 
             return builder.Build();

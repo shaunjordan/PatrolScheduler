@@ -1,6 +1,7 @@
 ﻿using PatrolScheduler.Database;
 using PatrolScheduler.Services;
 using PatrolScheduler.ViewModels;
+using PatrolScheduler.Views;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -11,7 +12,9 @@ namespace PatrolScheduler.ViewModel
     {
 
         private CustomerViewModel customerViewModel;
-
+        private CustomerView _custview;
+        
+        //private ICustomerDataService _customerDataService;
 
         object selectedView;
         
@@ -29,11 +32,13 @@ namespace PatrolScheduler.ViewModel
         public ICommand SelectCustomerView { get; private set; }
 
 
-        public MainViewModel()
+        public MainViewModel(ICustomerDataService _customerDataService)
         {
-            customerViewModel = new CustomerViewModel(ICustomerDataService customerDataService);
-
-            SelectCustomerView = new RelayCommand(() => SelectedView = customerViewModel);
+            //customerViewModel = new CustomerViewModel(_customerDataService);
+            //customerViewModel = new CustomerViewModel();
+            _custview = new CustomerView(_customerDataService);
+            //SelectCustomerView = new RelayCommand(() => SelectedView = customerViewModel);
+            SelectCustomerView = new RelayCommand(() => SelectedView = _custview);
 
         }
         //private ICustomerDataService _customerDataService;

@@ -20,11 +20,19 @@ namespace PatrolScheduler.ViewModels
         {
             CapstoneCustomers = new ObservableCollection<CapstoneCustomer>();
             _customerDataService = customerDataService;
+
         }
-        
+
+        //public CustomerViewModel()
+        //{
+        //    CapstoneCustomers = new ObservableCollection<CapstoneCustomer>();
+
+        //    //_customerDataService = customerDataService;
+        //}
+
         public async Task LoadAsync()
         {
-            var customers = await _customerDataService.GetAllCustomersAsync();
+            var customers = await _customerDataService.GetAllCustomersAsync();                       
 
             CapstoneCustomers.Clear();
 
@@ -46,5 +54,6 @@ namespace PatrolScheduler.ViewModels
                 OnPropertyChanged();
             }
         }
+
     }
 }
