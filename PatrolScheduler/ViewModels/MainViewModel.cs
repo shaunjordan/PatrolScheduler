@@ -11,8 +11,9 @@ namespace PatrolScheduler.ViewModel
     public class MainViewModel : BaseNotify
     {
 
-        private CustomerViewModel customerViewModel;
-        private CustomerView _custview;
+        //private CustomerViewModel customerViewModel;
+        private CustomerView _custView;
+        private EmployeeView _employeeView;
         
         //private ICustomerDataService _customerDataService;
 
@@ -30,15 +31,19 @@ namespace PatrolScheduler.ViewModel
         }
 
         public ICommand SelectCustomerView { get; private set; }
+        public ICommand SelectEmployeeView { get; private set; }
 
-
+        // load user control views into the content control and pass the data service into the code behind
+        
         public MainViewModel(ICustomerDataService _customerDataService)
         {
             //customerViewModel = new CustomerViewModel(_customerDataService);
             //customerViewModel = new CustomerViewModel();
-            _custview = new CustomerView(_customerDataService);
+            _custView = new CustomerView(_customerDataService);
+            _employeeView = new EmployeeView();
             //SelectCustomerView = new RelayCommand(() => SelectedView = customerViewModel);
-            SelectCustomerView = new RelayCommand(() => SelectedView = _custview);
+            SelectCustomerView = new RelayCommand(() => SelectedView = _custView);
+            SelectEmployeeView = new RelayCommand(() => SelectedView = _employeeView);
 
         }
         //private ICustomerDataService _customerDataService;

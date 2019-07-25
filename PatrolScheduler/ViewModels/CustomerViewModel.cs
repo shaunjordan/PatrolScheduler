@@ -1,12 +1,14 @@
 ﻿using PatrolScheduler.Database;
 using PatrolScheduler.Services;
 using PatrolScheduler.ViewModel;
+using Prism.Commands;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace PatrolScheduler.ViewModels
 {
@@ -21,6 +23,18 @@ namespace PatrolScheduler.ViewModels
             CapstoneCustomers = new ObservableCollection<CapstoneCustomer>();
             _customerDataService = customerDataService;
 
+            SaveCommand = new DelegateCommand(OnSaveExecute, OnSaveCanExecute);
+        }
+
+        private async void OnSaveExecute()
+        {
+            await _customerDataService.SaveAsync(SelectedCustomer);
+        }
+
+        private bool OnSaveCanExecute()
+        {
+            //TODO: is friend valid
+            return true;
         }
 
         //public CustomerViewModel()
@@ -54,6 +68,8 @@ namespace PatrolScheduler.ViewModels
                 OnPropertyChanged();
             }
         }
+
+        public ICommand SaveCommand { get; }
 
     }
 }

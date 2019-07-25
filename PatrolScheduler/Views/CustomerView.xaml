@@ -6,13 +6,7 @@
              xmlns:local="clr-namespace:PatrolScheduler.Views"
              xmlns:viewmodels="clr-namespace:PatrolScheduler.ViewModels"             
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" Background="White">
-    <!--<UserControl.DataContext>
-        <viewmodels:CustomerViewModel/>
-    </UserControl.DataContext>-->
-    <!--<ContentControl.DataContext>
-        <viewmodels:CustomerViewModel></viewmodels:CustomerViewModel>
-    </ContentControl.DataContext>-->
+             d:DesignHeight="450" d:DesignWidth="800" Background="White">    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
@@ -54,11 +48,12 @@
                 <!--13-->
                 <RowDefinition Height="Auto"/>
                 <!--14-->
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
             <Label Content="Customer Id"/>
-            <TextBox Grid.Row="1"/>
+            <TextBox Grid.Row="1" Text="{Binding SelectedCustomer.CustomerId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
 
             <Label Grid.Row="2" Content="Customer Name"/>
             <TextBox Grid.Row="3" Text="{Binding SelectedCustomer.CustomerName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
@@ -78,7 +73,7 @@
             <Label Grid.Row="12" Content="Zip Code"/>
             <TextBox Grid.Row="13" Text="{Binding SelectedCustomer.ZipCode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-            <!--<Button Grid.Row="14" Content="Test"/>-->
+            <Button Grid.Row="14" Content="Save" Command="{Binding SaveCommand}"/>
         </Grid>
     </Grid>
 </UserControl>

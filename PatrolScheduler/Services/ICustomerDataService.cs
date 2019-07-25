@@ -7,5 +7,7 @@ namespace PatrolScheduler.Services
     public interface ICustomerDataService
     {
         Task<List<CapstoneCustomer>> GetAllCustomersAsync();
+
+        Task SaveAsync(CapstoneCustomer capstoneCustomer);
     }
 }

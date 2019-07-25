@@ -31,5 +31,15 @@ namespace PatrolScheduler.Services
                 return await context.CapstoneCustomers.AsNoTracking().ToListAsync();
             }
         }
+
+        public async Task SaveAsync(CapstoneCustomer capstoneCustomer)
+        {
+            using (var context = _capstoneDbContext())
+            {
+                context.CapstoneCustomers.Attach(capstoneCustomer);
+                context.Entry(capstoneCustomer).State = EntityState.Modified;
+                await context.SaveChangesAsync();
+            }
+        }
     }
 }

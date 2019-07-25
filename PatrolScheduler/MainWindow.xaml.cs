@@ -34,10 +34,10 @@ namespace PatrolScheduler
             //Loaded += MainWindow_Loaded;
         }
 
-        private async void MainWindow_Loaded(object sender, RoutedEventArgs e)
-        {
-            //await _mainViewModel.LoadAsync();
-        }
+        //private async void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        //{
+        //    //await _mainViewModel.LoadAsync();
+        //}
 
         //private void Button_Click(object sender, RoutedEventArgs e)
         //{

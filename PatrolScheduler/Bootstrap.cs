@@ -21,6 +21,7 @@ namespace PatrolScheduler
             builder.RegisterType<MainViewModel>().AsSelf();
             builder.RegisterType<CustomerDataService>().As<ICustomerDataService>();
 
+            builder.RegisterType<EmployeeViewModel>().AsSelf();
             builder.RegisterType<CustomerViewModel>().AsSelf();
             builder.RegisterType<CapstoneDatabase>().AsSelf();
 
