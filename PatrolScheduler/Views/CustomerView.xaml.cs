@@ -23,6 +23,7 @@ namespace PatrolScheduler.Views
     /// </summary>
     public partial class CustomerView : UserControl
     {
+        //TODO: add better comments throughout and remove old commented code
         private ICustomerDataService CustomerDataService;
         private CustomerViewModel _customerViewModel;
 

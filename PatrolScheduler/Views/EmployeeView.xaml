@@ -11,9 +11,9 @@
             <ColumnDefinition Width="200"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <ListView Grid.Row="1" ItemsSource="{Binding CapstoneEmployees}"
+        <ListView ItemsSource="{Binding CapstoneEmployees}"
                   SelectedItem="{Binding SelectedEmployee, Mode=TwoWay}"
-                  DisplayMemberPath="CustomerName">
+                  DisplayMemberPath="FirstName">
 
         </ListView>
         <Grid Grid.Column="1">
