@@ -35,12 +35,12 @@ namespace PatrolScheduler.ViewModel
 
         // load user control views into the content control and pass the data service into the code behind
         
-        public MainViewModel(ICustomerDataService _customerDataService)
+        public MainViewModel(ICustomerDataService _customerDataService, IEmployeeDataService _employeeDataService)
         {
             //customerViewModel = new CustomerViewModel(_customerDataService);
             //customerViewModel = new CustomerViewModel();
             _custView = new CustomerView(_customerDataService);
-            _employeeView = new EmployeeView();
+            _employeeView = new EmployeeView(_employeeDataService);
             //SelectCustomerView = new RelayCommand(() => SelectedView = customerViewModel);
             SelectCustomerView = new RelayCommand(() => SelectedView = _custView);
             SelectEmployeeView = new RelayCommand(() => SelectedView = _employeeView);

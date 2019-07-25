@@ -127,6 +127,7 @@
     <Compile Include="Services\EmployeeDataService.cs" />
     <Compile Include="Services\GetCustomerData.cs" />
     <Compile Include="Services\ICustomerDataService.cs" />
+    <Compile Include="Services\IEmployeeDataService.cs" />
     <Compile Include="Services\LoginDataService.cs" />
     <Compile Include="ViewModels\BaseNotify.cs" />
     <Compile Include="ViewModels\CustomerViewModel.cs" />

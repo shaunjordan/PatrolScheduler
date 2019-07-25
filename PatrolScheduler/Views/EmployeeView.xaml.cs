@@ -1,4 +1,6 @@
-﻿using System;
+﻿using PatrolScheduler.Services;
+using PatrolScheduler.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +22,23 @@ namespace PatrolScheduler.Views
     /// </summary>
     public partial class EmployeeView : UserControl
     {
-        public EmployeeView()
+        private IEmployeeDataService EmployeeDataService;
+        private EmployeeViewModel _employeeViewModel;
+
+        public EmployeeView(IEmployeeDataService _employeeDataService)
         {
             InitializeComponent();
+            EmployeeDataService = _employeeDataService;
+
+            _employeeViewModel = new EmployeeViewModel(_employeeDataService);
+            this.DataContext = _employeeViewModel;
+
+            Loaded += EmployeeView_Loaded;
+        }
+
+        private async void EmployeeView_Loaded(object sender, RoutedEventArgs e)
+        {
+            await _employeeViewModel.LoadEmployeesAsync();
         }
     }
 }

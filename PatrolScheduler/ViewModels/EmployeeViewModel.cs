@@ -1,4 +1,6 @@
-﻿using PatrolScheduler.ViewModel;
+﻿using PatrolScheduler.Database;
+using PatrolScheduler.Services;
+using PatrolScheduler.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,6 +12,42 @@ namespace PatrolScheduler.ViewModels
 {
     public class EmployeeViewModel : BaseNotify
     {
-        ObservableCollection<string> Employees = new ObservableCollection<string> { "one", "two", "three" };
+
+        private IEmployeeDataService _employeeDataService;
+        private CapstoneEmployee _selectedEmployee;
+
+        public EmployeeViewModel(IEmployeeDataService employeeDataService)
+        {
+            CapstoneEmployees = new ObservableCollection<CapstoneEmployee>();
+
+            _employeeDataService = employeeDataService;
+        }
+        
+        public ObservableCollection<CapstoneEmployee> CapstoneEmployees { get; set; }
+
+        public async Task LoadEmployeesAsync()
+        {
+            var employees = await _employeeDataService.GetAllEmployeesAsync();
+
+            CapstoneEmployees.Clear();
+
+            foreach (var employee in employees)
+            {
+                CapstoneEmployees.Add(employee);
+            }
+        }
+
+        
+
+        public CapstoneEmployee SelectedEmployee
+        {
+            get { return _selectedEmployee; }
+            set
+            {
+                _selectedEmployee = value;
+                OnPropertyChanged();
+            }
+        }
+
     }
 }

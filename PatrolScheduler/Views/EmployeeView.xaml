@@ -3,15 +3,70 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:PatrolScheduler.Views"
-             DataContext="{Binding EmployeeViewModel}"
+             xmlns:local="clr-namespace:PatrolScheduler.Views"             
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" Background="Green">
+             d:DesignHeight="450" d:DesignWidth="800" Background="White">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <ListView x:Name="listviewtest" ItemsSource="{Binding Employees}"></ListView>
+        <ListView Grid.Row="1" ItemsSource="{Binding CapstoneEmployees}"
+                  SelectedItem="{Binding SelectedEmployee, Mode=TwoWay}"
+                  DisplayMemberPath="CustomerName">
+
+        </ListView>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <!--0-->
+                <RowDefinition Height="Auto"/>
+                <!--1-->
+                <RowDefinition Height="Auto"/>
+                <!--2-->
+                <RowDefinition Height="Auto"/>
+                <!--3-->
+                <RowDefinition Height="Auto"/>
+                <!--4-->
+                <RowDefinition Height="Auto"/>
+                <!--5-->
+                <RowDefinition Height="Auto"/>
+                <!--6-->
+                <RowDefinition Height="Auto"/>
+                <!--7-->
+                <RowDefinition Height="Auto"/>
+                <!--8-->
+                <RowDefinition Height="Auto"/>
+                <!--9-->
+                <RowDefinition Height="Auto"/>
+                <!--10-->
+                <RowDefinition Height="Auto"/>
+                <!--11-->
+                <RowDefinition Height="Auto"/>
+                <!--12-->
+                <RowDefinition Height="Auto"/>
+                <!--13-->
+                <RowDefinition Height="Auto"/>
+                <!--14-->
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Label Content="Employee Id"/>
+            <TextBox Grid.Row="1" Text="{Binding SelectedEmployee.EmployeeId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
+
+            <Label Grid.Row="2" Content="First Name"/>
+            <TextBox Grid.Row="3" Text="{Binding SelectedEmployee.FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <Label Grid.Row="4" Content="Last Name"/>
+            <TextBox Grid.Row="5" Text="{Binding SelectedEmployee.LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <Label Grid.Row="6" Content="Badge Number (optional)"/>
+            <TextBox Grid.Row="7" Text="{Binding SelectedEmployee.BadgeNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <Label Grid.Row="8" Content="Patrol Car Number (optional)"/>
+            <TextBox Grid.Row="9" Text="{Binding SelectedEmployee.BadgeNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <Button Grid.Row="14" Content="Save" Command="{Binding SaveCommand}"/>
+        </Grid>
     </Grid>
 </UserControl>
