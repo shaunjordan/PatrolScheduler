@@ -121,6 +121,8 @@
     <Compile Include="Database\GetUser_Result.cs">
       <DependentUpon>CapstoneDatabase.tt</DependentUpon>
     </Compile>
+    <Compile Include="Events\CustomerDetailEvent.cs" />
+    <Compile Include="Events\CustomerSavedEvent.cs" />
     <Compile Include="Models\Lookup.cs" />
     <Compile Include="Models\LookupModel.cs" />
     <Compile Include="RelayCommand.cs" />
@@ -133,6 +135,7 @@
     <Compile Include="ViewModels\BaseNotify.cs" />
     <Compile Include="ViewModels\CustomerDetailViewModel.cs" />
     <Compile Include="ViewModels\CustomerListViewModel.cs" />
+    <Compile Include="ViewModels\CustomerSelectViewModel.cs" />
     <Compile Include="ViewModels\CustomerViewModel.cs" />
     <Compile Include="ViewModels\EmployeeViewModel.cs" />
     <Compile Include="ViewModels\ICustomerDetailViewModel.cs" />

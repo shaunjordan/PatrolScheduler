@@ -2,6 +2,7 @@
 using PatrolScheduler.Services;
 using PatrolScheduler.ViewModels;
 using PatrolScheduler.Views;
+using Prism.Events;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;

@@ -3,6 +3,7 @@ using PatrolScheduler.Database;
 using PatrolScheduler.Services;
 using PatrolScheduler.ViewModel;
 using PatrolScheduler.ViewModels;
+using Prism.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,8 @@ namespace PatrolScheduler
         public IContainer Bootstrapper()
         {
             var builder = new ContainerBuilder();
+
+            builder.RegisterType<EventAggregator>().As<IEventAggregator>().SingleInstance();
 
             builder.RegisterType<MainWindow>().AsSelf();
             builder.RegisterType<MainViewModel>().AsSelf();

@@ -1,6 +1,7 @@
 ﻿using PatrolScheduler.Database;
 using PatrolScheduler.Services;
 using PatrolScheduler.ViewModels;
+using Prism.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +28,7 @@ namespace PatrolScheduler.Views
         private ICustomerDataService CustomerDataService;
         private ICustomerListViewModel CustomerListViewModel;
         private ICustomerDetailViewModel CustomerDetailViewlModel;
+        private IEventAggregator EventAggregator;
         private CustomerViewModel _customerViewModel;
 
 
@@ -38,6 +40,7 @@ namespace PatrolScheduler.Views
             CustomerDataService = _customerDataService;
             CustomerListViewModel = _customerListViewModel;
             CustomerDetailViewlModel = _customerDetailViewModel;
+            //EventAggregator = eventAggregator;
             
             _customerViewModel = new CustomerViewModel(CustomerListViewModel, CustomerDataService, CustomerDetailViewlModel);
             this.DataContext = _customerViewModel;

@@ -1,8 +1,10 @@
 ﻿using PatrolScheduler.Database;
+using PatrolScheduler.Models;
 using PatrolScheduler.Services;
 using PatrolScheduler.ViewModel;
 using PatrolScheduler.Wrappers;
 using Prism.Commands;
+using Prism.Events;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -33,6 +35,7 @@ namespace PatrolScheduler.ViewModels
 
             CustomerListViewModel = customerListViewModel;
             CustomerDetailViewModel = customerDetailViewModel;
+            //this.eventAggregator = eventAggregator;
             //CapstoneCustomers = new ObservableCollection<CapstoneCustomer>();
             //_customerDataService = customerDataService;
 
@@ -71,7 +74,8 @@ namespace PatrolScheduler.ViewModels
             //}
         }
 
-       
+        
+
 
         //public ObservableCollection<CapstoneCustomer> CapstoneCustomers { get; set; }
 
@@ -98,7 +102,7 @@ namespace PatrolScheduler.ViewModels
 
         //private string _custName;
 
-        
+
 
         //public string CustName
         //{
@@ -128,13 +132,14 @@ namespace PatrolScheduler.ViewModels
 
         //}
 
-        public ICommand SaveCommand { get; }
+        //public ICommand SaveCommand { get; }
 
         /// <summary>
         /// /////////////////////
         /// </summary>
 
         private Dictionary<string, List<string>> _errorDictionary = new Dictionary<string, List<string>>();
+        private readonly IEventAggregator eventAggregator;
 
         public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
 
