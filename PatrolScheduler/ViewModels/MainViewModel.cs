@@ -11,15 +11,22 @@ namespace PatrolScheduler.ViewModel
 {
     public class MainViewModel : BaseNotify
     {
+        /*
+         * 
+         * MainViewModel is responsible for loading the application and passing the interfaces to each of the views
+         * Views are loaded through a RelayCommand and their appropriate ViewModels are passed as parameters
+         * 
+         */
 
-        //private CustomerViewModel customerViewModel;
+        
         private CustomerView _custView;
         private EmployeeView _employeeView;
         
-        //private ICustomerDataService _customerDataService;
-
-        object selectedView;
-        
+        public ICommand SelectCustomerView { get; private set; }
+        public ICommand SelectEmployeeView { get; private set; }
+      
+        //SelectedView property bound to the Dockpanel menu items on the MainWindow view
+        object selectedView;        
 
         public object SelectedView
         {
@@ -31,59 +38,20 @@ namespace PatrolScheduler.ViewModel
             }
         }
 
-        public ICommand SelectCustomerView { get; private set; }
-        public ICommand SelectEmployeeView { get; private set; }
-
-        // load user control views into the content control and pass the data service into the code behind
-        
+        // Views are loaded here via RelayCommand along with their view models and data services        
         public MainViewModel(ICustomerListViewModel _customerListViewModel,
             ICustomerDataService _customerDataService, 
             ICustomerDetailViewModel _customerDetailViewModel,
             IEmployeeDataService _employeeDataService)
         {
-            //customerViewModel = new CustomerViewModel(_customerDataService);
-            //customerViewModel = new CustomerViewModel();
+            
             _custView = new CustomerView(_customerListViewModel, _customerDataService, _customerDetailViewModel);
             _employeeView = new EmployeeView(_employeeDataService);
-            //SelectCustomerView = new RelayCommand(() => SelectedView = customerViewModel);
+            
             SelectCustomerView = new RelayCommand(() => SelectedView = _custView);
             SelectEmployeeView = new RelayCommand(() => SelectedView = _employeeView);
 
         }
-        //private ICustomerDataService _customerDataService;
-        //private CapstoneCustomer _selectedCustomer;
-
-
-        //public MainViewModel(ICustomerDataService customerDataService)
-        //{
-        //    CapstoneCustomers = new ObservableCollection<CapstoneCustomer>();
-        //    _customerDataService = customerDataService;
-        //}
-
-        //public async Task LoadAsync()
-        //{
-        //    var customers = await _customerDataService.GetAllCustomersAsync();
-
-        //    CapstoneCustomers.Clear();
-
-        //    foreach (var customer in customers)
-        //    {
-        //        CapstoneCustomers.Add(customer);
-        //    }
-        //}
-
-        //public ObservableCollection<CapstoneCustomer> CapstoneCustomers { get; set; }
-
-
-        //public CapstoneCustomer SelectedCustomer
-        //{
-        //    get { return _selectedCustomer; }
-        //    set
-        //    {
-        //        _selectedCustomer = value;
-        //        OnPropertyChanged();
-        //    }
-        //}
-
+        
     }
 }

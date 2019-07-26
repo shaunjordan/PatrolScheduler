@@ -123,6 +123,7 @@
     </Compile>
     <Compile Include="Events\CustomerDetailEvent.cs" />
     <Compile Include="Events\CustomerSavedEvent.cs" />
+    <Compile Include="Helpers\CustomerHelper.cs" />
     <Compile Include="Models\Lookup.cs" />
     <Compile Include="Models\LookupModel.cs" />
     <Compile Include="RelayCommand.cs" />
@@ -156,7 +157,6 @@
     <Compile Include="Views\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Wrappers\CustomerWrapper.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

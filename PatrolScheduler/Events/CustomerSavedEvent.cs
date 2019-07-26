@@ -13,7 +13,7 @@ namespace PatrolScheduler.Events
 
     public class CustomerSavedEventArgs
     {
-        public int Id { get; set; }
+        public int CustomerId { get; set; }
         public string DisplayMember { get; set; }
     }
 }

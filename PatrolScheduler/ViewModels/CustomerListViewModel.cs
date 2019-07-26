@@ -14,6 +14,13 @@ namespace PatrolScheduler.ViewModels
 {
     public class CustomerListViewModel : BaseNotify, ICustomerListViewModel
     {
+        /*
+         * This ViewModel provides a list of customers via a LookupService in "Services"
+         * which returns a CustomerId and CustomerName - no need to load the entire customer
+         * into a small list item
+         * 
+         */
+
         private readonly ILookupService lookupService;
         private readonly IEventAggregator eventAggregator;
 
@@ -27,7 +34,7 @@ namespace PatrolScheduler.ViewModels
 
         private void CustomerSaved(CustomerSavedEventArgs obj)
         {
-           var item = Customers.Single(lookup => lookup.Id == obj.Id);
+           var item = Customers.Single(lookup => lookup.Id == obj.CustomerId);
             item.DisplayMember = obj.DisplayMember;
         }
 
@@ -43,6 +50,8 @@ namespace PatrolScheduler.ViewModels
 
         public ObservableCollection<CustomerSelectViewModel> Customers { get; }
 
+
+        //Selected customer publishes a Prism event letting the CustomerDetail event know that a customer has been selected
         private CustomerSelectViewModel _selectedCustomer;
 
         public CustomerSelectViewModel SelectedCustomer

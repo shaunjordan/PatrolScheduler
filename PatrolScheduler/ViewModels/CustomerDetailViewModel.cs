@@ -1,5 +1,6 @@
 ﻿using PatrolScheduler.Database;
 using PatrolScheduler.Events;
+using PatrolScheduler.Helpers;
 using PatrolScheduler.Services;
 using PatrolScheduler.ViewModel;
 using Prism.Commands;
@@ -13,6 +14,12 @@ using System.Windows.Input;
 
 namespace PatrolScheduler.ViewModels
 {
+    /*
+     * This class loads customer details into their appropriate textboxes so they can be altered and saved
+     * It subscribes to the CustomerDetailActivate in order to Load the full details of the selected Customer
+     *  
+     */
+
     public class CustomerDetailViewModel : BaseNotify, ICustomerDetailViewModel
     {
         private readonly ICustomerDataService customerDataService;
@@ -28,10 +35,11 @@ namespace PatrolScheduler.ViewModels
 
         private async void OnSaveExecute()
         {
-            await customerDataService.SaveAsync(Customer);
+            //Customer.Customer is the CapstoneCustomer declared in the CustomerHelper class
+            await customerDataService.SaveAsync(Customer.Customer);
             eventAggregator.GetEvent<CustomerSavedEvent>().Publish(new CustomerSavedEventArgs
             {
-                Id = Customer.CustomerId,
+                CustomerId = Customer.CustomerId,
                 DisplayMember = Customer.CustomerName
             });
         }
@@ -50,13 +58,18 @@ namespace PatrolScheduler.ViewModels
 
         public async Task LoadAsync(int customerId)
         {
-            Customer = await customerDataService.GetCustomerAsync(customerId);
+            var customer = await customerDataService.GetCustomerAsync(customerId);
+
+            Customer = new CustomerHelper(customer);
         }
         
+        /*
+         * CustomerHelper allows for data validation here to prevent the viewmodel from growing too large
+         * 
+         */
+        private CustomerHelper _customer;
 
-        private CapstoneCustomer _customer;
-
-        public CapstoneCustomer Customer
+        public CustomerHelper Customer
         {
             get { return _customer; }
             set

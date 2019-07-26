@@ -24,6 +24,8 @@ namespace PatrolScheduler
     {
         private MainViewModel _mainViewModel;
 
+        //Main window loads MainViewModel which is resovled via AutoFac Bootstrap registration
+
         public MainWindow(MainViewModel viewModel)
         {
             InitializeComponent();
@@ -34,6 +36,7 @@ namespace PatrolScheduler
             //Loaded += MainWindow_Loaded;
         }
 
+        
         //private async void MainWindow_Loaded(object sender, RoutedEventArgs e)
         //{
         //    //await _mainViewModel.LoadAsync();
