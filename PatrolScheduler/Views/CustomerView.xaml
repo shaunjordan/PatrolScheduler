@@ -4,7 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PatrolScheduler.Views"
-             xmlns:viewmodels="clr-namespace:PatrolScheduler.ViewModels"             
+             xmlns:viewmodels="clr-namespace:PatrolScheduler.ViewModels" 
+             xmlns:view="clr-namespace:PatrolScheduler.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" Background="White">    
     <Grid>
@@ -12,68 +13,13 @@
             <ColumnDefinition Width="200"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <ListView ItemsSource="{Binding CapstoneCustomers}"
+        <view:CustomerListView DataContext="{Binding CustomerListViewModel}"/>
+        <view:CustomerDetailView Grid.Column="1" DataContext="{Binding CustomerDetailViewModel}"/>
+        <!--<ListView ItemsSource="{Binding CapstoneCustomers}"
                   SelectedItem="{Binding SelectedCustomer, Mode=TwoWay}"
                   DisplayMemberPath="CustomerName">
 
-        </ListView>
-        <Grid Grid.Column="1">
-            <Grid.RowDefinitions>
-                <!--0-->
-                <RowDefinition Height="Auto"/>
-                <!--1-->
-                <RowDefinition Height="Auto"/>
-                <!--2-->
-                <RowDefinition Height="Auto"/>
-                <!--3-->
-                <RowDefinition Height="Auto"/>
-                <!--4-->
-                <RowDefinition Height="Auto"/>
-                <!--5-->
-                <RowDefinition Height="Auto"/>
-                <!--6-->
-                <RowDefinition Height="Auto"/>
-                <!--7-->
-                <RowDefinition Height="Auto"/>
-                <!--8-->
-                <RowDefinition Height="Auto"/>
-                <!--9-->
-                <RowDefinition Height="Auto"/>
-                <!--10-->
-                <RowDefinition Height="Auto"/>
-                <!--11-->
-                <RowDefinition Height="Auto"/>
-                <!--12-->
-                <RowDefinition Height="Auto"/>
-                <!--13-->
-                <RowDefinition Height="Auto"/>
-                <!--14-->
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-
-            <Label Content="Customer Id"/>
-            <TextBox Grid.Row="1" Text="{Binding SelectedCustomer.CustomerId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
-
-            <Label Grid.Row="2" Content="Customer Name"/>
-            <TextBox Grid.Row="3" Text="{Binding SelectedCustomer.CustomerName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-
-            <Label Grid.Row="4" Content="Address Line 1"/>
-            <TextBox Grid.Row="5" Text="{Binding SelectedCustomer.Address1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-
-            <Label Grid.Row="6" Content="Address Line 2"/>
-            <TextBox Grid.Row="7" Text="{Binding SelectedCustomer.Address2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-
-            <Label Grid.Row="8" Content="City"/>
-            <TextBox Grid.Row="9" Text="{Binding SelectedCustomer.City, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-
-            <Label Grid.Row="10" Content="State"/>
-            <TextBox Grid.Row="11" Text="{Binding SelectedCustomer.State, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-
-            <Label Grid.Row="12" Content="Zip Code"/>
-            <TextBox Grid.Row="13" Text="{Binding SelectedCustomer.ZipCode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-
-            <Button Grid.Row="14" Content="Save" Command="{Binding SaveCommand}"/>
-        </Grid>
+        </ListView>-->
+        
     </Grid>
 </UserControl>

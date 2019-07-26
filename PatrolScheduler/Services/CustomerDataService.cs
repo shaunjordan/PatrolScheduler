@@ -24,11 +24,11 @@ namespace PatrolScheduler.Services
         }
                 
 
-        public async Task<List<CapstoneCustomer>> GetAllCustomersAsync()
+        public async Task<CapstoneCustomer> GetCustomerAsync(int customerId)
         {          
             using (var context = _capstoneDbContext())
             {
-                return await context.CapstoneCustomers.AsNoTracking().ToListAsync();
+                return await context.CapstoneCustomers.AsNoTracking().SingleAsync(customer => customer.CustomerId == customerId);
             }
         }
 

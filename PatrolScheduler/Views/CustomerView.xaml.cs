@@ -25,15 +25,21 @@ namespace PatrolScheduler.Views
     {
         //TODO: add better comments throughout and remove old commented code
         private ICustomerDataService CustomerDataService;
+        private ICustomerListViewModel CustomerListViewModel;
+        private ICustomerDetailViewModel CustomerDetailViewlModel;
         private CustomerViewModel _customerViewModel;
 
 
-        public CustomerView(ICustomerDataService _customerDataService)
+        public CustomerView(ICustomerListViewModel _customerListViewModel, 
+            ICustomerDataService _customerDataService,
+            ICustomerDetailViewModel _customerDetailViewModel)
         {
             InitializeComponent();
             CustomerDataService = _customerDataService;
-
-            _customerViewModel = new CustomerViewModel(CustomerDataService);
+            CustomerListViewModel = _customerListViewModel;
+            CustomerDetailViewlModel = _customerDetailViewModel;
+            
+            _customerViewModel = new CustomerViewModel(CustomerListViewModel, CustomerDataService, CustomerDetailViewlModel);
             this.DataContext = _customerViewModel;
 
             //_customerViewModel = customerViewModel;

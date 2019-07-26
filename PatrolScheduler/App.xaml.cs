@@ -47,5 +47,11 @@ namespace PatrolScheduler
 
             mainWindow.Show();
         }
+
+        private void Application_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
+        {
+            MessageBox.Show("Oops! Something went wrong. Please contact your administrator. Message: " + e.Exception.Message);
+            e.Handled = true;
+        }
     }
 }
