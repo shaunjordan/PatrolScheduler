@@ -36,7 +36,7 @@ namespace PatrolScheduler.ViewModels
         private async void OnSaveExecute()
         {
             //Customer.Customer is the CapstoneCustomer declared in the CustomerHelper class
-            await customerDataService.SaveAsync(Customer.Customer);
+            await customerDataService.SaveAsync(Customer.Model);
             eventAggregator.GetEvent<CustomerSavedEvent>().Publish(new CustomerSavedEventArgs
             {
                 CustomerId = Customer.CustomerId,

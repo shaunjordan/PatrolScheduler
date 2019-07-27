@@ -19,9 +19,11 @@ using System.Windows.Shapes;
 
 namespace PatrolScheduler.Views
 {
-    /// <summary>
-    /// Interaction logic for CustomerView.xaml
-    /// </summary>
+    /*
+     * 
+     * Code behind of main CustomerView loads the appropriate viewmodels for the two main sections
+     * 
+     */
     public partial class CustomerView : UserControl
     {
         //TODO: add better comments throughout and remove old commented code
@@ -44,14 +46,7 @@ namespace PatrolScheduler.Views
             
             _customerViewModel = new CustomerViewModel(CustomerListViewModel, CustomerDataService, CustomerDetailViewlModel);
             this.DataContext = _customerViewModel;
-
-            //_customerViewModel = customerViewModel;
-
-            //CustomerViewModel _customerViewModel = new CustomerViewModel();
-
-            //DataContext = _customerViewModel;
-
-
+                       
             Loaded += CustomerView_Loaded;
         }
 
@@ -60,18 +55,6 @@ namespace PatrolScheduler.Views
             await _customerViewModel.LoadAsync();
             
         }
-
-
-        //public CustomerView(CustomerViewModel customerViewModel)
-        //{
-        //    InitializeComponent();
-
-        //    _customerViewModel = customerViewModel;
-
-        //    DataContext = _customerViewModel;
-
-        //}
-
 
 
     }

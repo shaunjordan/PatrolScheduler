@@ -1,102 +1,96 @@
 ﻿using PatrolScheduler.Database;
+using System;
+using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace PatrolScheduler.Helpers
 {
-    public class CustomerHelper : ErrorValidation
+    public class CustomerHelper : ModelWrapper<CapstoneCustomer>
     {
-        public CustomerHelper(CapstoneCustomer customer)
+        public CustomerHelper(CapstoneCustomer model) : base(model)
         {
-            Customer = customer;
         }
-
-        public CapstoneCustomer Customer { get; }
 
         public int CustomerId
         {
-            get { return Customer.CustomerId; }
+            get { return GetValue<int>(); }
             set
             {
-                Customer.CustomerId = value;
+                Model.CustomerId = value;
                 OnPropertyChanged();
             }
         }
 
         public string CustomerName
         {
-            get { return Customer.CustomerName; }
+            get { return GetValue<string>(); }
             set
             {
-                Customer.CustomerName = value;
-                OnPropertyChanged();
-                ValidateProperty(nameof(CustomerName));
+                SetValue(value);
+
             }
-        }        
+        }
+
+
 
         public string Address1
         {
-            get { return Customer.Address1; }
+            get { return GetValue<string>(); }
             set
             {
-                Customer.Address1 = value;
-                OnPropertyChanged();
+                SetValue(value);
             }
         }
 
         public string Address2
         {
-            get { return Customer.Address2; }
+            get { return GetValue<string>(); }
             set
             {
-                Customer.Address2 = value;
-                OnPropertyChanged();
+                SetValue(value);
             }
         }
 
         public string City
         {
-            get { return Customer.City; }
+            get { return GetValue<string>(); }
             set
             {
-                Customer.City = value;
-                OnPropertyChanged();
+                SetValue(value);
             }
-        }       
+        }
 
         public string ZipCode
         {
-            get { return Customer.ZipCode; }
+            get { return GetValue<string>(); }
             set
             {
-                Customer.ZipCode = value;
-                OnPropertyChanged();
+                SetValue(value);
             }
         }
 
         public string State
         {
-            get { return Customer.State; }
+            get { return GetValue<string>(); }
             set
             {
-                Customer.State = value;
-                OnPropertyChanged();
+                SetValue(value);
             }
         }
+                    
 
-        private void ValidateProperty(string propertyName)
+        protected override IEnumerable<string> ValidateProperty(string propertyName)
         {
-            ClearErrors(propertyName);
-
             switch (propertyName)
             {
                 case nameof(CustomerName):
                     if (string.Equals(CustomerName, "Robot"))
                     {
-                        AddErrors(propertyName, "Robots are not valid friends");
+                        yield return "Robots are not valid friends";
                     }
                     break;
             }
-        }        
+        }
     }
 }
