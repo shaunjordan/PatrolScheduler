@@ -6,6 +6,22 @@
              ShutdownMode="OnExplicitShutdown"
              DispatcherUnhandledException="Application_DispatcherUnhandledException">
     <Application.Resources>
-         
+        <Style TargetType="TextBlock">
+            <Setter Property="Validation.ErrorTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <StackPanel>
+                            <AdornedElementPlaceholder/>
+                            <TextBlock Text="Error" Foreground="Red" FontSize="12"/>
+                        </StackPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="True">
+                    
+                </Trigger>
+            </Style.Triggers>
+        </Style>
     </Application.Resources>
 </Application>

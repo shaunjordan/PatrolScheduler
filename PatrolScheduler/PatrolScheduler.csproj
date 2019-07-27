@@ -124,6 +124,7 @@
     <Compile Include="Events\CustomerDetailEvent.cs" />
     <Compile Include="Events\CustomerSavedEvent.cs" />
     <Compile Include="Helpers\CustomerHelper.cs" />
+    <Compile Include="Helpers\ErrorValidation.cs" />
     <Compile Include="Models\Lookup.cs" />
     <Compile Include="Models\LookupModel.cs" />
     <Compile Include="RelayCommand.cs" />
