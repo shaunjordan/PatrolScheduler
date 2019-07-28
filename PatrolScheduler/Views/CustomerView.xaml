@@ -13,12 +13,6 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <local:CustomerListView DataContext="{Binding CustomerListViewModel}"/>
-        <local:CustomerDetailView Grid.Column="1" DataContext="{Binding CustomerDetailViewModel}"/>
-        <!--<ListView ItemsSource="{Binding CapstoneCustomers}"
-                  SelectedItem="{Binding SelectedCustomer, Mode=TwoWay}"
-                  DisplayMemberPath="CustomerName">
-
-        </ListView>-->
-        
+        <local:CustomerDetailView Grid.Column="1" DataContext="{Binding CustomerDetailViewModel}"/>        
     </Grid>
 </UserControl>

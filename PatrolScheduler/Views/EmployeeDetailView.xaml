@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="PatrolScheduler.Views.CustomerDetailView"
+﻿<UserControl x:Class="PatrolScheduler.Views.EmployeeDetailView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -41,26 +41,20 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <Label Content="Customer Id"/>
-        <TextBox Grid.Row="1" Text="{Binding Customer.CustomerId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
+        <Label Content="Employee Id"/>
+        <TextBox Grid.Row="1" Text="{Binding Employee.EmployeeId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
 
-        <Label Grid.Row="2" Content="Customer Name"/>
-        <TextBox Grid.Row="3" Text="{Binding Customer.CustomerName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <Label Grid.Row="2" Content="First Name"/>
+        <TextBox Grid.Row="3" Text="{Binding Employee.FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-        <Label Grid.Row="4" Content="Address Line 1" Margin="10 0"/>
-        <TextBox Grid.Row="5" Text="{Binding Customer.Address1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <Label Grid.Row="4" Content="Last Name"/>
+        <TextBox Grid.Row="5" Text="{Binding Employee.LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-        <Label Grid.Row="6" Content="Address Line 2"/>
-        <TextBox Grid.Row="7" Text="{Binding Customer.Address2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <Label Grid.Row="6" Content="Badge Number (optional)"/>
+        <TextBox Grid.Row="7" Text="{Binding Employee.BadgeNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-        <Label Grid.Row="8" Content="City"/>
-        <TextBox Grid.Row="9" Text="{Binding Customer.City, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-
-        <Label Grid.Row="10" Content="State"/>
-        <TextBox Grid.Row="11" Text="{Binding Customer.State, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-
-        <Label Grid.Row="12" Content="Zip Code"/>
-        <TextBox Grid.Row="13" Text="{Binding Customer.ZipCode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <Label Grid.Row="8" Content="Patrol Car Number (optional)"/>
+        <TextBox Grid.Row="9" Text="{Binding Employee.PatrolCar, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
         <Button Grid.Row="14" Content="Save" Command="{Binding SaveCommand}"/>
     </Grid>

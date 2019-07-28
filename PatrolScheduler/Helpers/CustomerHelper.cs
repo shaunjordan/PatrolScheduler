@@ -85,9 +85,9 @@ namespace PatrolScheduler.Helpers
             switch (propertyName)
             {
                 case nameof(CustomerName):
-                    if (string.Equals(CustomerName, "Robot"))
+                    if (String.IsNullOrWhiteSpace(propertyName))
                     {
-                        yield return "Robots are not valid friends";
+                        yield return "Customer Name is required";
                     }
                     break;
             }

@@ -17,11 +17,11 @@ namespace PatrolScheduler.Services
             _capstoneDbContext = capstoneDbContext;
         }
 
-       public async Task<List<CapstoneEmployee>> GetAllEmployeesAsync()
+       public async Task<CapstoneEmployee> GetEmployeeAsync(int employeeId)
         {
             using (var context = _capstoneDbContext())
             {
-                return await context.CapstoneEmployees.AsNoTracking().ToListAsync();
+                return await context.CapstoneEmployees.AsNoTracking().SingleAsync(emp => emp.EmployeeId == employeeId);
             }
         }
     }

@@ -6,6 +6,6 @@ namespace PatrolScheduler.Services
 {
     public interface IEmployeeDataService
     {
-        Task<List<CapstoneEmployee>> GetAllEmployeesAsync();
+        Task<CapstoneEmployee> GetEmployeeAsync(int employeeId);
     }
 }

@@ -30,6 +30,7 @@ namespace PatrolScheduler.Helpers
         protected virtual void ErrorDictChanged(string propertyName)
         {
             ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
+            base.OnPropertyChanged(nameof(HasErrors));
         }
 
         protected void AddErrors(string propertyName, string error)

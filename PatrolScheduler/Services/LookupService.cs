@@ -11,7 +11,7 @@ namespace PatrolScheduler.Services
 {
     public class LookupService : ILookupService
     {
-        private readonly Func<CapstoneDatabase> _databaseContext;
+        private Func<CapstoneDatabase> _databaseContext;
 
         public LookupService(Func<CapstoneDatabase> context)
         {

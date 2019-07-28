@@ -22,8 +22,8 @@ namespace PatrolScheduler.ViewModels
 
     public class CustomerDetailViewModel : BaseNotify, ICustomerDetailViewModel
     {
-        private readonly ICustomerDataService customerDataService;
-        private readonly IEventAggregator eventAggregator;
+        private ICustomerDataService customerDataService;
+        private IEventAggregator eventAggregator;
 
         public CustomerDetailViewModel(ICustomerDataService customerDataService, IEventAggregator eventAggregator)
         {
@@ -47,7 +47,7 @@ namespace PatrolScheduler.ViewModels
         private bool OnSaveCanExecute()
         {
             //TODO: is friend valid
-            return true;
+            return Customer != null && !Customer.HasErrors;
         }
 
 
@@ -61,6 +61,16 @@ namespace PatrolScheduler.ViewModels
             var customer = await customerDataService.GetCustomerAsync(customerId);
 
             Customer = new CustomerHelper(customer);
+
+            Customer.PropertyChanged += (p, c) =>
+            {
+                if (c.PropertyName == nameof(Customer.HasErrors))
+                {
+                    ((DelegateCommand)SaveCommand).RaiseCanExecuteChanged();
+                }
+            };
+
+            ((DelegateCommand)SaveCommand).RaiseCanExecuteChanged();
         }
         
         /*
