@@ -35,6 +35,11 @@ namespace PatrolScheduler.Services
 
         }
 
+        public void Remove(CapstoneCustomer model)
+        {
+             _capstoneDbContext.CapstoneCustomers.Remove(model);
+        }
+
         public async Task SaveAsync()
         {
 

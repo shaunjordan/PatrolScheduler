@@ -10,5 +10,6 @@ namespace PatrolScheduler.Services
 
         Task SaveAsync();
         void Add(CapstoneCustomer customer);
+        void Remove(CapstoneCustomer model);
     }
 }

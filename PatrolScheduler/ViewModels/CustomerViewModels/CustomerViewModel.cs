@@ -45,10 +45,16 @@ namespace PatrolScheduler.ViewModels
             _customerDetailViewModelFunc = customerDetailViewModelFunc;
 
             eventAggregator.GetEvent<CustomerDetailEvent>().Subscribe(CustomerDetailActivated);
+            eventAggregator.GetEvent<CustomerDeletedEvent>().Subscribe(CustomerDeleted);
 
             CustomerListViewModel = customerListViewModel;
 
             CreateCustomerCommand = new DelegateCommand(OnCreateCustomer);
+        }
+
+        private void CustomerDeleted(int id)
+        {
+            CustomerDetailViewModel = null;
         }
 
         private ICustomerDetailViewModel _customerDetailViewModel;
@@ -72,7 +78,7 @@ namespace PatrolScheduler.ViewModels
             CustomerDetailActivated(null);            
         }
 
-        //TODO: remove this comment - OnOpenFriendDetailView event
+        
         private async void CustomerDetailActivated(int? customerId)
         {
             CustomerDetailViewModel = _customerDetailViewModelFunc();

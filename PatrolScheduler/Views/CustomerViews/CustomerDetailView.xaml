@@ -63,5 +63,6 @@
         <TextBox Grid.Row="13" Text="{Binding Customer.ZipCode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
         <Button Grid.Row="14" Content="Save" Command="{Binding SaveCommand}"/>
+        <Button Grid.Row="15" Content="Delete" Command="{Binding DeleteCommand}"/>
     </Grid>
 </UserControl>

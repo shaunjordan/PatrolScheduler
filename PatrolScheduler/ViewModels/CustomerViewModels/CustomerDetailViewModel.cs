@@ -31,6 +31,15 @@ namespace PatrolScheduler.ViewModels
             this.eventAggregator = eventAggregator;
             //eventAggregator.GetEvent<CustomerDetailEvent>().Subscribe(CustomerDetailActivated);
             SaveCommand = new DelegateCommand(OnSaveExecute, OnSaveCanExecute);
+            DeleteCommand = new DelegateCommand(OnDeleteExecute);
+
+        }
+
+        private async void OnDeleteExecute()
+        {
+            customerDataService.Remove(Customer.Model);
+            await customerDataService.SaveAsync();
+            eventAggregator.GetEvent<CustomerDeletedEvent>().Publish(Customer.CustomerId);
         }
 
         private async void OnSaveExecute()
@@ -97,6 +106,8 @@ namespace PatrolScheduler.ViewModels
         }
 
         public ICommand SaveCommand { get; }
+
+        public ICommand DeleteCommand { get; }
 
     }
 }

@@ -121,6 +121,7 @@
     <Compile Include="Database\GetUser_Result.cs">
       <DependentUpon>CapstoneDatabase.tt</DependentUpon>
     </Compile>
+    <Compile Include="Events\CustomerDeletedEvent.cs" />
     <Compile Include="Events\CustomerDetailEvent.cs" />
     <Compile Include="Events\CustomerSavedEvent.cs" />
     <Compile Include="Events\EmployeeDetailEvent.cs" />
