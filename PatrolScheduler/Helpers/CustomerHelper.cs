@@ -85,7 +85,7 @@ namespace PatrolScheduler.Helpers
             switch (propertyName)
             {
                 case nameof(CustomerName):
-                    if (String.IsNullOrWhiteSpace(propertyName))
+                    if (String.IsNullOrWhiteSpace(CustomerName))
                     {
                         yield return "Customer Name is required";
                     }

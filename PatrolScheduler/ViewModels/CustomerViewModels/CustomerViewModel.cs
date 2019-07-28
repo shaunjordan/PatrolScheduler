@@ -1,4 +1,5 @@
 ﻿using PatrolScheduler.Database;
+using PatrolScheduler.Events;
 using PatrolScheduler.Models;
 using PatrolScheduler.Services;
 using PatrolScheduler.ViewModel;
@@ -17,8 +18,9 @@ using System.Windows.Input;
 namespace PatrolScheduler.ViewModels
 {
     public class CustomerViewModel : BaseNotify
-    {      
+    {
         
+
         /*
          * This class is responsible for loading the separate ViewModels in the main CustomerView
          * which are CustomerListViewModel and CustomerDetailViewModel
@@ -27,24 +29,55 @@ namespace PatrolScheduler.ViewModels
          */
 
         public ICustomerListViewModel CustomerListViewModel { get; }
-        public ICustomerDetailViewModel CustomerDetailViewModel { get; }
+
+        private Func<ICustomerDetailViewModel> _customerDetailViewModelFunc;
+
+        //public ICustomerDetailViewModel CustomerDetailViewModel { get; }
+
+        private IEventAggregator _eventAggregator;
 
         public CustomerViewModel(ICustomerListViewModel customerListViewModel, 
-            ICustomerDataService customerDataService, 
-            ICustomerDetailViewModel customerDetailViewModel)
+            ICustomerRepository customerDataService, 
+            Func<ICustomerDetailViewModel> customerDetailViewModelFunc, IEventAggregator eventAggregator)
         {
+            _eventAggregator = eventAggregator;            
+            //CustomerDetailViewModel = customerDetailViewModel;
+            _customerDetailViewModelFunc = customerDetailViewModelFunc;
+
+            eventAggregator.GetEvent<CustomerDetailEvent>().Subscribe(CustomerDetailActivated);
 
             CustomerListViewModel = customerListViewModel;
-            CustomerDetailViewModel = customerDetailViewModel;            
+
+            CreateCustomerCommand = new DelegateCommand(OnCreateCustomer);
         }
 
-       
+        private ICustomerDetailViewModel _customerDetailViewModel;
+
+        public ICustomerDetailViewModel CustomerDetailViewModel
+        {
+            get { return _customerDetailViewModel; }
+            private set { _customerDetailViewModel = value; OnPropertyChanged(); }
+        }
+
 
         public async Task LoadAsync()
         {
             await CustomerListViewModel.LoadCustomerAsync();          
         }
-        
-        
+
+        public ICommand CreateCustomerCommand { get; }
+
+        private void OnCreateCustomer()
+        {
+            CustomerDetailActivated(null);            
+        }
+
+        //TODO: remove this comment - OnOpenFriendDetailView event
+        private async void CustomerDetailActivated(int? customerId)
+        {
+            CustomerDetailViewModel = _customerDetailViewModelFunc();
+            await CustomerDetailViewModel.LoadAsync(customerId);
+        }
+
     }
 }

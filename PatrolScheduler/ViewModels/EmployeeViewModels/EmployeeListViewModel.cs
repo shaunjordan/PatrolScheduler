@@ -41,7 +41,7 @@ namespace PatrolScheduler.ViewModels.EmployeeViewModels
 
         private EmployeeSelectViewModel _selectedEmployee;
 
-        public EmployeeSelectViewModel SelectedeEmployee
+        public EmployeeSelectViewModel SelectedEmployee
         {
             get { return _selectedEmployee; }
             set

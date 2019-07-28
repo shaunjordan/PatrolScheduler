@@ -22,21 +22,21 @@ namespace PatrolScheduler.ViewModels
 
     public class CustomerDetailViewModel : BaseNotify, ICustomerDetailViewModel
     {
-        private ICustomerDataService customerDataService;
+        private ICustomerRepository customerDataService;
         private IEventAggregator eventAggregator;
 
-        public CustomerDetailViewModel(ICustomerDataService customerDataService, IEventAggregator eventAggregator)
+        public CustomerDetailViewModel(ICustomerRepository customerDataService, IEventAggregator eventAggregator)
         {
             this.customerDataService = customerDataService;
             this.eventAggregator = eventAggregator;
-            eventAggregator.GetEvent<CustomerDetailEvent>().Subscribe(CustomerDetailActivated);
+            //eventAggregator.GetEvent<CustomerDetailEvent>().Subscribe(CustomerDetailActivated);
             SaveCommand = new DelegateCommand(OnSaveExecute, OnSaveCanExecute);
         }
 
         private async void OnSaveExecute()
         {
             //Customer.Customer is the CapstoneCustomer declared in the CustomerHelper class
-            await customerDataService.SaveAsync(Customer.Model);
+            await customerDataService.SaveAsync();
             eventAggregator.GetEvent<CustomerSavedEvent>().Publish(new CustomerSavedEventArgs
             {
                 CustomerId = Customer.CustomerId,
@@ -46,19 +46,14 @@ namespace PatrolScheduler.ViewModels
 
         private bool OnSaveCanExecute()
         {
-            //TODO: is friend valid
+            //TODO: is customer valid
             return Customer != null && !Customer.HasErrors;
         }
-
-
-        private async void CustomerDetailActivated(int customerId)
+        
+        public async Task LoadAsync(int? customerId)
         {
-            await LoadAsync(customerId);
-        }
-
-        public async Task LoadAsync(int customerId)
-        {
-            var customer = await customerDataService.GetCustomerAsync(customerId);
+            var customer = customerId.HasValue ? await customerDataService.GetCustomerAsync(customerId.Value) : CreateCustomer();
+                
 
             Customer = new CustomerHelper(customer);
 
@@ -71,8 +66,20 @@ namespace PatrolScheduler.ViewModels
             };
 
             ((DelegateCommand)SaveCommand).RaiseCanExecuteChanged();
+
+            if (Customer.CustomerId == 0)
+            {
+                Customer.CustomerName = "";
+            }
         }
-        
+
+        private CapstoneCustomer CreateCustomer()
+        {
+            var customer = new CapstoneCustomer();
+            customerDataService.Add(customer);
+            return customer;
+        }
+
         /*
          * CustomerHelper allows for data validation here to prevent the viewmodel from growing too large
          * 

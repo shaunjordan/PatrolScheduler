@@ -4,6 +4,7 @@ using PatrolScheduler.ViewModels;
 using PatrolScheduler.ViewModels.EmployeeViewModels;
 using PatrolScheduler.Views;
 using Prism.Events;
+using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -41,14 +42,14 @@ namespace PatrolScheduler.ViewModel
 
         // Views are loaded here via RelayCommand along with their view models and data services        
         public MainViewModel(ICustomerListViewModel _customerListViewModel,
-            ICustomerDataService _customerDataService, 
-            ICustomerDetailViewModel _customerDetailViewModel,
+            ICustomerRepository _customerDataService, 
+            Func<ICustomerDetailViewModel> _customerDetailViewModel,
             IEmployeeDataService _employeeDataService,
             IEmployeeListViewModel _employeeListViewModel,
-            IEmployeeDetailViewModel _employeeDetailViewModel)
+            IEmployeeDetailViewModel _employeeDetailViewModel,IEventAggregator _eventAggregator)
         {
             
-            _custView = new CustomerView(_customerListViewModel, _customerDataService, _customerDetailViewModel);
+            _custView = new CustomerView(_customerListViewModel, _customerDataService, _customerDetailViewModel, _eventAggregator);
             _employeeView = new EmployeeView(_employeeListViewModel, _employeeDataService, _employeeDetailViewModel);
             
             SelectCustomerView = new RelayCommand(() => SelectedView = _custView);

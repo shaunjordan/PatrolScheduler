@@ -1,9 +1,13 @@
-﻿using PatrolScheduler.ViewModel;
+﻿using PatrolScheduler.Events;
+using PatrolScheduler.ViewModel;
+using Prism.Commands;
+using Prism.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace PatrolScheduler.ViewModels
 {
@@ -11,12 +15,22 @@ namespace PatrolScheduler.ViewModels
     {
         
         private string _displayMember;
+        private IEventAggregator _eventAggregator;
 
-        public CustomerSelectViewModel(int id, string displayMember)
+        public CustomerSelectViewModel(int id, string displayMember, IEventAggregator eventAggregator)
         {
+            _eventAggregator = eventAggregator;
             Id = id;
             DisplayMember = displayMember;
+            OpenCustomerDetailCommand = new DelegateCommand(OpenCustomerDetailExecute);
         }
+
+        private void OpenCustomerDetailExecute()
+        {
+            _eventAggregator.GetEvent<CustomerDetailEvent>().Publish(Id);
+        }
+
+        
 
         public int Id { get; }
 
@@ -30,6 +44,10 @@ namespace PatrolScheduler.ViewModels
                 OnPropertyChanged();
             }
         }
+
+        public ICommand OpenCustomerDetailCommand { get; }
+
+        
 
     }
 }

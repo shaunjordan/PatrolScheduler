@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PatrolScheduler.Events
 {
-    public class CustomerDetailEvent : PubSubEvent<int>
+    public class CustomerDetailEvent : PubSubEvent<int?>
     {
 
     }

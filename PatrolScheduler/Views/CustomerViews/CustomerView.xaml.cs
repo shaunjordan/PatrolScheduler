@@ -27,24 +27,24 @@ namespace PatrolScheduler.Views
     public partial class CustomerView : UserControl
     {
         //TODO: add better comments throughout and remove old commented code
-        private ICustomerDataService CustomerDataService;
+        private ICustomerRepository CustomerDataService;
         private ICustomerListViewModel CustomerListViewModel;
-        private ICustomerDetailViewModel CustomerDetailViewlModel;
+        private Func<ICustomerDetailViewModel> CustomerDetailViewlModel;
         private IEventAggregator EventAggregator;
         private CustomerViewModel _customerViewModel;
 
 
-        public CustomerView(ICustomerListViewModel _customerListViewModel, 
-            ICustomerDataService _customerDataService,
-            ICustomerDetailViewModel _customerDetailViewModel)
+        public CustomerView(ICustomerListViewModel _customerListViewModel,
+            ICustomerRepository _customerDataService,
+            Func<ICustomerDetailViewModel> _customerDetailViewModel, IEventAggregator _eventAggregator)
         {
             InitializeComponent();
             CustomerDataService = _customerDataService;
             CustomerListViewModel = _customerListViewModel;
             CustomerDetailViewlModel = _customerDetailViewModel;
-            //EventAggregator = eventAggregator;
-            
-            _customerViewModel = new CustomerViewModel(CustomerListViewModel, CustomerDataService, CustomerDetailViewlModel);
+            EventAggregator = _eventAggregator;
+
+            _customerViewModel = new CustomerViewModel(CustomerListViewModel, CustomerDataService, CustomerDetailViewlModel, EventAggregator);
             this.DataContext = _customerViewModel;
                        
             Loaded += CustomerView_Loaded;
@@ -52,10 +52,10 @@ namespace PatrolScheduler.Views
 
         private async void CustomerView_Loaded(object sender, RoutedEventArgs e)
         {
-            await _customerViewModel.LoadAsync();
-            
+            await _customerViewModel.LoadAsync();            
         }
 
+        
 
     }
 }

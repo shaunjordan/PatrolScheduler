@@ -15,7 +15,7 @@ namespace PatrolScheduler.Services
 
         public EmployeeLookupService(Func<CapstoneDatabase> context)
         {
-            this._context = context;
+            _context = context;
         }
 
         public async Task<IEnumerable<LookupModel>> EmployeeLookupAsync()

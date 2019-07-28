@@ -34,8 +34,17 @@ namespace PatrolScheduler.ViewModels
 
         private void CustomerSaved(CustomerSavedEventArgs obj)
         {
-           var item = Customers.Single(lookup => lookup.Id == obj.CustomerId);
-            item.DisplayMember = obj.DisplayMember;
+           var item = Customers.SingleOrDefault(lookup => lookup.Id == obj.CustomerId);
+
+            if (item == null)
+            {
+                Customers.Add(new CustomerSelectViewModel(obj.CustomerId, obj.DisplayMember, eventAggregator));
+            }
+            else
+            {
+                item.DisplayMember = obj.DisplayMember;
+            }
+            
         }
 
         public async Task LoadCustomerAsync()
@@ -44,29 +53,12 @@ namespace PatrolScheduler.ViewModels
             Customers.Clear();
             foreach (var customer in lookup)
             {
-                Customers.Add(new CustomerSelectViewModel(customer.Id, customer.DisplayMember));
+                Customers.Add(new CustomerSelectViewModel(customer.Id, customer.DisplayMember, eventAggregator));
             }
         }
 
         public ObservableCollection<CustomerSelectViewModel> Customers { get; }
 
-
-        //Selected customer publishes a Prism event letting the CustomerDetail event know that a customer has been selected
-        private CustomerSelectViewModel _selectedCustomer;
-
-        public CustomerSelectViewModel SelectedCustomer
-        {
-            get { return _selectedCustomer; }
-            set
-            {
-                _selectedCustomer = value;
-                OnPropertyChanged();
-                if (_selectedCustomer != null)
-                {
-                    eventAggregator.GetEvent<CustomerDetailEvent>().Publish(_selectedCustomer.Id);
-                }
-            }
-        }
     }
     
 }

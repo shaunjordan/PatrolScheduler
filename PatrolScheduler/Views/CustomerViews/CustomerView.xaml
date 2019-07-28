@@ -8,11 +8,18 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" Background="White">    
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <local:CustomerListView DataContext="{Binding CustomerListViewModel}"/>
-        <local:CustomerDetailView Grid.Column="1" DataContext="{Binding CustomerDetailViewModel}"/>        
+        <!--TODO: REMOVE THIS COMMENT-->
+        <local:CustomerListView  DataContext="{Binding CustomerListViewModel}"/>
+        <local:CustomerDetailView Grid.Column="1" DataContext="{Binding CustomerDetailViewModel}"/>
+        <Button Content="Add New Customer" Grid.Row="1" Command="{Binding CreateCustomerCommand}"/>
     </Grid>
 </UserControl>

@@ -4,10 +4,11 @@ using PatrolScheduler.Database;
 
 namespace PatrolScheduler.Services
 {
-    public interface ICustomerDataService
+    public interface ICustomerRepository
     {
         Task<CapstoneCustomer> GetCustomerAsync(int customerId);
 
-        Task SaveAsync(CapstoneCustomer capstoneCustomer);
+        Task SaveAsync();
+        void Add(CapstoneCustomer customer);
     }
 }

@@ -28,7 +28,7 @@
                 <MenuItem Header="Manage">
                     <MenuItem Header="Customers" Command="{Binding SelectCustomerView}"/>
                     <MenuItem Header="Employees" Command="{Binding SelectEmployeeView}"/>
-                    <MenuItem Header="Patrol Schedules"/>
+                    <MenuItem Header="Patrol Schedules" Command="{Binding SelectePatrolView}"/>
                     <MenuItem Header="Patrol Cars"/>
                 </MenuItem>
             </Menu>
