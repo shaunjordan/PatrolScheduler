@@ -24,7 +24,7 @@ namespace PatrolScheduler
             builder.RegisterType<MainWindow>().AsSelf();
             builder.RegisterType<MainViewModel>().AsSelf();
             builder.RegisterType<CustomerRepository>().As<ICustomerRepository>();
-            builder.RegisterType<EmployeeDataService>().As<IEmployeeDataService>();
+            builder.RegisterType<EmployeeRepository>().As<IEmployeeRepository>();
             builder.RegisterType<LookupService>().AsImplementedInterfaces();
             builder.RegisterType<EmployeeLookupService>().AsImplementedInterfaces();
 

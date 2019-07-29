@@ -24,7 +24,9 @@
         </Grid.RowDefinitions>
         <DockPanel>
             <Menu DockPanel.Dock="Top">
-                <MenuItem Header="_File"/>
+                <MenuItem Header="_File">
+                    <MenuItem Header="_Exit" Command="{Binding ExitCommand}"/>
+                </MenuItem>
                 <MenuItem Header="Manage">
                     <MenuItem Header="Customers" Command="{Binding SelectCustomerView}"/>
                     <MenuItem Header="Employees" Command="{Binding SelectEmployeeView}"/>

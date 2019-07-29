@@ -1,9 +1,13 @@
-﻿using PatrolScheduler.ViewModel;
+﻿using PatrolScheduler.Events;
+using PatrolScheduler.ViewModel;
+using Prism.Commands;
+using Prism.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace PatrolScheduler.ViewModels.EmployeeViewModels
 {
@@ -11,11 +15,20 @@ namespace PatrolScheduler.ViewModels.EmployeeViewModels
     {
 
         private string _displayMember;
+        private IEventAggregator _eventAggregator;
 
-        public EmployeeSelectViewModel(int id, string displayMember)
+        public EmployeeSelectViewModel(int id, string displayMember, IEventAggregator eventAggregator)
         {
+            _eventAggregator = eventAggregator;
             Id = id;
             DisplayMember = displayMember;
+
+            OpenEmployeeDetailCommand = new DelegateCommand(OpenEmployeeDetailExecute);
+        }
+
+        private void OpenEmployeeDetailExecute()
+        {
+            _eventAggregator.GetEvent<EmployeeDetailEvent>().Publish(Id);
         }
 
         public int Id { get; }
@@ -29,5 +42,7 @@ namespace PatrolScheduler.ViewModels.EmployeeViewModels
                 OnPropertyChanged();
             }
         }
+
+        public ICommand OpenEmployeeDetailCommand { get; }
     }
 }

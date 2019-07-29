@@ -23,9 +23,12 @@ namespace PatrolScheduler.ViewModel
         
         private CustomerView _custView;
         private EmployeeView _employeeView;
+        private PatrolScheduleView _scheduleView;
         
         public ICommand SelectCustomerView { get; private set; }
         public ICommand SelectEmployeeView { get; private set; }
+        public ICommand SelectScheduleView { get; private set; }
+        public ICommand ExitCommand { get; private set; }
       
         //SelectedView property bound to the Dockpanel menu items on the MainWindow view
         object selectedView;        
@@ -44,18 +47,27 @@ namespace PatrolScheduler.ViewModel
         public MainViewModel(ICustomerListViewModel _customerListViewModel,
             ICustomerRepository _customerDataService, 
             Func<ICustomerDetailViewModel> _customerDetailViewModel,
-            IEmployeeDataService _employeeDataService,
+            IEmployeeRepository _employeeDataService,
             IEmployeeListViewModel _employeeListViewModel,
-            IEmployeeDetailViewModel _employeeDetailViewModel,IEventAggregator _eventAggregator)
+            Func<IEmployeeDetailViewModel> _employeeDetailViewModel,IEventAggregator _eventAggregator)
         {
             
             _custView = new CustomerView(_customerListViewModel, _customerDataService, _customerDetailViewModel, _eventAggregator);
-            _employeeView = new EmployeeView(_employeeListViewModel, _employeeDataService, _employeeDetailViewModel);
+            _employeeView = new EmployeeView(_employeeListViewModel, _employeeDataService, _employeeDetailViewModel, _eventAggregator);
+            _scheduleView = new PatrolScheduleView();
             
             SelectCustomerView = new RelayCommand(() => SelectedView = _custView);
             SelectEmployeeView = new RelayCommand(() => SelectedView = _employeeView);
+            SelectScheduleView = new RelayCommand(() => SelectedView = _scheduleView);
+            ExitCommand = new RelayCommand(() => Shutdown());
 
         }
+
+        private void Shutdown()
+        {
+            Shutdown();
+        }
+
         
     }
 }

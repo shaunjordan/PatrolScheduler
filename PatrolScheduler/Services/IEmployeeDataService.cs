@@ -4,8 +4,9 @@ using PatrolScheduler.Database;
 
 namespace PatrolScheduler.Services
 {
-    public interface IEmployeeDataService
+    public interface IEmployeeRepository
     {
         Task<CapstoneEmployee> GetEmployeeAsync(int employeeId);
+        void Add(CapstoneEmployee employee);
     }
 }

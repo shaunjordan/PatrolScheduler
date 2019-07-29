@@ -3,6 +3,7 @@ using PatrolScheduler.Events;
 using PatrolScheduler.Helpers;
 using PatrolScheduler.Services;
 using PatrolScheduler.ViewModel;
+using Prism.Commands;
 using Prism.Events;
 using System;
 using System.Collections.Generic;
@@ -17,15 +18,26 @@ namespace PatrolScheduler.ViewModels.EmployeeViewModels
 
     {
         private IEventAggregator eventAggregator;
-        private IEmployeeDataService employeeDataService;
+        private IEmployeeRepository employeeDataService;
 
-        public EmployeeDetailViewModel(IEmployeeDataService employeeDataService,IEventAggregator eventAggregator)
+        public EmployeeDetailViewModel(IEmployeeRepository employeeDataService,IEventAggregator eventAggregator)
         {
             
             this.employeeDataService = employeeDataService;
             this.eventAggregator = eventAggregator;
-            eventAggregator.GetEvent<EmployeeDetailEvent>().Subscribe(EmployeeDetailActivated);
-            //TODO: add subscribe and save methods
+
+            SaveCommand = new DelegateCommand(OnSaveExecute, OnSaveCanExecute);
+            
+        }
+
+        private void OnSaveExecute()
+        {
+            throw new NotImplementedException();
+        }
+
+        private bool OnSaveCanExecute()
+        {
+            throw new NotImplementedException();
         }
 
         private async void EmployeeDetailActivated(int employeeId)
@@ -33,12 +45,32 @@ namespace PatrolScheduler.ViewModels.EmployeeViewModels
             await LoadAsync(employeeId);
         }
 
-        public async Task LoadAsync(int employeeId)
+        public async Task LoadAsync(int? employeeId)
         {
-            var employee = await employeeDataService.GetEmployeeAsync(employeeId);
+            var employee = employeeId.HasValue ? await employeeDataService.GetEmployeeAsync(employeeId.Value) : CreateEmployee(); 
 
             Employee = new EmployeeHelper(employee);
-            //add employee
+
+            Employee.PropertyChanged += (p, e) =>
+            {
+                if (e.PropertyName == nameof(Employee.HasErrors))
+                {
+                    ((DelegateCommand)SaveCommand).RaiseCanExecuteChanged();
+                }
+            };
+            ((DelegateCommand)SaveCommand).RaiseCanExecuteChanged();
+
+            if (Employee.EmployeeId == 0)
+            {
+                Employee.FirstName = "";
+            }
+        }
+
+        private CapstoneEmployee CreateEmployee()
+        {
+            var employee = new CapstoneEmployee();
+            employeeDataService.Add(employee); //TODO: implement this
+            return employee;
         }
 
         private EmployeeHelper _employee;

@@ -22,8 +22,23 @@ namespace PatrolScheduler.ViewModels.EmployeeViewModels
             this._eventAggregator = eventAggregator;
 
             Employees = new ObservableCollection<EmployeeSelectViewModel>();
-            //Add customer saved event here
 
+            eventAggregator.GetEvent<EmployeeSavedEvent>().Subscribe(EmployeeSaved);
+
+        }
+
+        private void EmployeeSaved(EmployeeSavedEventArgs obj)
+        {
+            var item = Employees.SingleOrDefault(lookup => lookup.Id == obj.EmployeeId);
+
+            if (item == null)
+            {
+                Employees.Add(new EmployeeSelectViewModel(obj.EmployeeId, obj.DisplayMember, _eventAggregator));
+            }
+            else
+            {
+                item.DisplayMember = obj.DisplayMember;
+            }
         }
 
         public ObservableCollection<EmployeeSelectViewModel> Employees { get; }
@@ -35,24 +50,24 @@ namespace PatrolScheduler.ViewModels.EmployeeViewModels
 
             foreach (var employee in lookup)
             {
-                Employees.Add(new EmployeeSelectViewModel(employee.Id, employee.DisplayMember));
+                Employees.Add(new EmployeeSelectViewModel(employee.Id, employee.DisplayMember, _eventAggregator));
             }
         }
 
-        private EmployeeSelectViewModel _selectedEmployee;
+        //private EmployeeSelectViewModel _selectedEmployee;
 
-        public EmployeeSelectViewModel SelectedEmployee
-        {
-            get { return _selectedEmployee; }
-            set
-            {
-                _selectedEmployee = value;
-                OnPropertyChanged();
-                if (_selectedEmployee != null)
-                {
-                    _eventAggregator.GetEvent<EmployeeDetailEvent>().Publish(_selectedEmployee.Id);
-                }
-            }
-        }
+        //public EmployeeSelectViewModel SelectedEmployee
+        //{
+        //    get { return _selectedEmployee; }
+        //    set
+        //    {
+        //        _selectedEmployee = value;
+        //        OnPropertyChanged();
+        //        if (_selectedEmployee != null)
+        //        {
+        //            _eventAggregator.GetEvent<EmployeeDetailEvent>().Publish(_selectedEmployee.Id);
+        //        }
+        //    }
+        //}
     }
 }

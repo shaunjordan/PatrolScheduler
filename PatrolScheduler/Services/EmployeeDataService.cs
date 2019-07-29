@@ -8,21 +8,27 @@ using System.Threading.Tasks;
 
 namespace PatrolScheduler.Services
 {
-    public class EmployeeDataService : IEmployeeDataService
+    public class EmployeeRepository : IEmployeeRepository
     {
-        private readonly Func<CapstoneDatabase> _capstoneDbContext;
+        private CapstoneDatabase _capstoneDbContext;
 
-        public EmployeeDataService(Func<CapstoneDatabase> capstoneDbContext)
+        public EmployeeRepository(CapstoneDatabase capstoneDbContext)
         {
             _capstoneDbContext = capstoneDbContext;
         }
 
-       public async Task<CapstoneEmployee> GetEmployeeAsync(int employeeId)
+        public void Add(CapstoneEmployee employee)
         {
-            using (var context = _capstoneDbContext())
-            {
-                return await context.CapstoneEmployees.AsNoTracking().SingleAsync(emp => emp.EmployeeId == employeeId);
-            }
+            _capstoneDbContext.CapstoneEmployees.Add(employee);
         }
+
+        public async Task<CapstoneEmployee> GetEmployeeAsync(int employeeId)
+        {            
+            
+            return await _capstoneDbContext.CapstoneEmployees.SingleAsync(emp => emp.EmployeeId == employeeId);
+            
+        }
+
+
     }
 }

@@ -45,7 +45,8 @@ namespace PatrolScheduler.Helpers
             get { return GetValue<DateTime>(); }
             set
             {
-                SetValue(value);            }
+                SetValue(value);
+            }
         }
 
         public int BadgeNumber

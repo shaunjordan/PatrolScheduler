@@ -1,6 +1,7 @@
 ﻿using PatrolScheduler.Services;
 using PatrolScheduler.ViewModels;
 using PatrolScheduler.ViewModels.EmployeeViewModels;
+using Prism.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,22 +24,25 @@ namespace PatrolScheduler.Views
     /// </summary>
     public partial class EmployeeView : UserControl
     {
-        private IEmployeeDataService EmployeeDataService;
+        private IEmployeeRepository EmployeeDataService;
         private IEmployeeListViewModel EmployeeListViewModel;
-        private IEmployeeDetailViewModel EmployeeDetailViewModel;
+        private Func<IEmployeeDetailViewModel> EmployeeDetailViewModel;
+        private IEventAggregator EventAggregator;
         private EmployeeViewModel _employeeViewModel;
 
         public EmployeeView(IEmployeeListViewModel _employeeListViewModel,
-            IEmployeeDataService _employeeDataService,
-            IEmployeeDetailViewModel _employeeDetailViewModel)
+            IEmployeeRepository _employeeDataService,
+            Func<IEmployeeDetailViewModel> _employeeDetailViewModel,
+            IEventAggregator _eventAggregator)
         {
             InitializeComponent();
 
             EmployeeDataService = _employeeDataService;
             EmployeeListViewModel = _employeeListViewModel;
             EmployeeDetailViewModel = _employeeDetailViewModel;
+            EventAggregator = _eventAggregator;
 
-            _employeeViewModel = new EmployeeViewModel(EmployeeListViewModel, EmployeeDataService, EmployeeDetailViewModel);
+            _employeeViewModel = new EmployeeViewModel(EmployeeListViewModel, EmployeeDataService, EmployeeDetailViewModel, EventAggregator);
             this.DataContext = _employeeViewModel;
 
             Loaded += EmployeeView_Loaded;

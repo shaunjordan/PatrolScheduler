@@ -29,19 +29,15 @@ namespace PatrolScheduler.ViewModels
          */
 
         public ICustomerListViewModel CustomerListViewModel { get; }
-
         private Func<ICustomerDetailViewModel> _customerDetailViewModelFunc;
-
-        //public ICustomerDetailViewModel CustomerDetailViewModel { get; }
-
         private IEventAggregator _eventAggregator;
+
 
         public CustomerViewModel(ICustomerListViewModel customerListViewModel, 
             ICustomerRepository customerDataService, 
             Func<ICustomerDetailViewModel> customerDetailViewModelFunc, IEventAggregator eventAggregator)
         {
-            _eventAggregator = eventAggregator;            
-            //CustomerDetailViewModel = customerDetailViewModel;
+            _eventAggregator = eventAggregator; 
             _customerDetailViewModelFunc = customerDetailViewModelFunc;
 
             eventAggregator.GetEvent<CustomerDetailEvent>().Subscribe(CustomerDetailActivated);
