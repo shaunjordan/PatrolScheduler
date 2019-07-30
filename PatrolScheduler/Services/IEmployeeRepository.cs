@@ -8,5 +8,7 @@ namespace PatrolScheduler.Services
     {
         Task<CapstoneEmployee> GetEmployeeAsync(int employeeId);
         void Add(CapstoneEmployee employee);
+        Task SaveAsync();
+        void Remove(CapstoneEmployee model);
     }
 }

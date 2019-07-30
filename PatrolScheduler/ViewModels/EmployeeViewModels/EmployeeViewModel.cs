@@ -3,6 +3,7 @@ using PatrolScheduler.Events;
 using PatrolScheduler.Services;
 using PatrolScheduler.ViewModel;
 using PatrolScheduler.ViewModels.EmployeeViewModels;
+using Prism.Commands;
 using Prism.Events;
 using System;
 using System.Collections.Generic;
@@ -10,13 +11,14 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace PatrolScheduler.ViewModels
 {
     public class EmployeeViewModel : BaseNotify
     {
 
-        //public IEmployeeDataService _employeeDataService;
+       
         public IEmployeeListViewModel EmployeeListViewModel { get;  }
         private Func<IEmployeeDetailViewModel> _employeeDetailViewModelFunc;
         private IEventAggregator _eventAggregator;
@@ -29,14 +31,24 @@ namespace PatrolScheduler.ViewModels
             _eventAggregator = eventAggregator;
             _employeeDetailViewModelFunc = employeeDetailViewModelFunc;
 
-            EmployeeListViewModel = employeeListViewModel;
-
             _eventAggregator.GetEvent<EmployeeDetailEvent>().Subscribe(EmployeeDetailActivated);
+            _eventAggregator.GetEvent<EmployeeDeletedEvent>().Subscribe(EmployeeDeleted);
+
+            CreateEmployeeCommand = new DelegateCommand(OnCreateEmployee);
+            EmployeeListViewModel = employeeListViewModel;          
             
 
         }
 
-        
+        private void EmployeeDeleted(int id)
+        {
+            EmployeeDetailViewModel = null;
+        }
+
+        private void OnCreateEmployee()
+        {
+            EmployeeDetailActivated(null);
+        }
 
         public async Task LoadAsync()
         {
@@ -59,6 +71,8 @@ namespace PatrolScheduler.ViewModels
             EmployeeDetailViewModel = _employeeDetailViewModelFunc();
             await EmployeeDetailViewModel.LoadAsync(employeeId);
         }
+
+        public ICommand CreateEmployeeCommand { get; }
 
     }
 }

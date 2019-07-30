@@ -27,23 +27,32 @@ namespace PatrolScheduler.ViewModels.EmployeeViewModels
             this.eventAggregator = eventAggregator;
 
             SaveCommand = new DelegateCommand(OnSaveExecute, OnSaveCanExecute);
+            DeleteCommand = new DelegateCommand(OnDeleteExecute);
             
+        }
+
+        private async void OnDeleteExecute()
+        {
+            employeeDataService.Remove(Employee.Model);
+            await employeeDataService.SaveAsync();
+
+            eventAggregator.GetEvent<EmployeeDeletedEvent>().Publish(Employee.EmployeeId);
         }
 
         private void OnSaveExecute()
         {
-            throw new NotImplementedException();
+            employeeDataService.SaveAsync();
+            eventAggregator.GetEvent<EmployeeSavedEvent>().Publish(new EmployeeSavedEventArgs {
+                EmployeeId = Employee.EmployeeId,
+                DisplayMember = Employee.FirstName + " " + Employee.LastName
+            });
         }
 
         private bool OnSaveCanExecute()
         {
-            throw new NotImplementedException();
+            return Employee != null && !Employee.HasErrors;
         }
-
-        private async void EmployeeDetailActivated(int employeeId)
-        {
-            await LoadAsync(employeeId);
-        }
+        
 
         public async Task LoadAsync(int? employeeId)
         {
@@ -69,7 +78,7 @@ namespace PatrolScheduler.ViewModels.EmployeeViewModels
         private CapstoneEmployee CreateEmployee()
         {
             var employee = new CapstoneEmployee();
-            employeeDataService.Add(employee); //TODO: implement this
+            employeeDataService.Add(employee);
             return employee;
         }
 
@@ -86,5 +95,7 @@ namespace PatrolScheduler.ViewModels.EmployeeViewModels
         }
 
         public ICommand SaveCommand { get; }
+
+        public ICommand DeleteCommand { get; }
     }
 }

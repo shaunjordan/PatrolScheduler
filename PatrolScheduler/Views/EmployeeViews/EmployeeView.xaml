@@ -13,11 +13,17 @@
         </DataTemplate>
     </UserControl.Resources>
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <local:EmployeeListView DataContext="{Binding EmployeeListViewModel}"/>
         <ContentControl Grid.Column="1" Content="{Binding EmployeeDetailViewModel}"/>
+        <Button Content="Add New Employee" Grid.Row="1" Command="{Binding CreateEmployeeCommand}"/>
     </Grid>
 </UserControl>
