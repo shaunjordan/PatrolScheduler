@@ -14,7 +14,7 @@
                         <Button Content="{Binding DisplayMember}" Command="{Binding OpenEmployeeDetailCommand}">
                             <Button.Template>
                                 <ControlTemplate TargetType="Button">
-                                    <Grid x:Name="bGrid">
+                                    <Grid x:Name="eGrid">
                                         <ContentPresenter/>
                                     </Grid>
                                 </ControlTemplate>
