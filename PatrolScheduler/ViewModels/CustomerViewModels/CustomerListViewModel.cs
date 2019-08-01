@@ -30,6 +30,17 @@ namespace PatrolScheduler.ViewModels
             this.eventAggregator = eventAggregator;
             Customers = new ObservableCollection<CustomerSelectViewModel>();
             eventAggregator.GetEvent<CustomerSavedEvent>().Subscribe(CustomerSaved);
+            eventAggregator.GetEvent<CustomerDeletedEvent>().Subscribe(CustomerDeleted);
+            //event subscribe to CustomerDeleted
+        }
+
+        private void CustomerDeleted(int customerId)
+        {
+            var customer = Customers.SingleOrDefault(cust => cust.Id == customerId);
+            if (customer != null)
+            {
+                Customers.Remove(customer);
+            }
         }
 
         private void CustomerSaved(CustomerSavedEventArgs obj)

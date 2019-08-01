@@ -39,10 +39,11 @@ namespace PatrolScheduler.ViewModels.EmployeeViewModels
             eventAggregator.GetEvent<EmployeeDeletedEvent>().Publish(Employee.EmployeeId);
         }
 
-        private void OnSaveExecute()
+        private async void OnSaveExecute()
         {
-            employeeDataService.SaveAsync();
-            eventAggregator.GetEvent<EmployeeSavedEvent>().Publish(new EmployeeSavedEventArgs {
+            await employeeDataService.SaveAsync();
+            eventAggregator.GetEvent<EmployeeSavedEvent>().Publish(new EmployeeSavedEventArgs
+            {
                 EmployeeId = Employee.EmployeeId,
                 DisplayMember = Employee.FirstName + " " + Employee.LastName
             });
@@ -56,7 +57,16 @@ namespace PatrolScheduler.ViewModels.EmployeeViewModels
 
         public async Task LoadAsync(int? employeeId)
         {
-            var employee = employeeId.HasValue ? await employeeDataService.GetEmployeeAsync(employeeId.Value) : CreateEmployee(); 
+            CapstoneEmployee employee;
+
+            if (employeeId.HasValue)
+            {
+                employee = await employeeDataService.GetModelAsync(employeeId.Value);
+            }
+            else
+            {
+                employee = CreateEmployee();
+            }
 
             Employee = new EmployeeHelper(employee);
 

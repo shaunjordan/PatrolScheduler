@@ -24,7 +24,17 @@ namespace PatrolScheduler.ViewModels.EmployeeViewModels
             Employees = new ObservableCollection<EmployeeSelectViewModel>();
 
             eventAggregator.GetEvent<EmployeeSavedEvent>().Subscribe(EmployeeSaved);
+            eventAggregator.GetEvent<EmployeeDeletedEvent>().Subscribe(EmployeeDeleted);
 
+        }
+
+        private void EmployeeDeleted(int employeeId)
+        {
+            var employee = Employees.SingleOrDefault(emp => emp.Id == employeeId);
+            if (employee != null)
+            {
+                Employees.Remove(employee);
+            }
         }
 
         private void EmployeeSaved(EmployeeSavedEventArgs obj)
@@ -39,9 +49,7 @@ namespace PatrolScheduler.ViewModels.EmployeeViewModels
             {
                 item.DisplayMember = obj.DisplayMember;
             }
-        }
-
-        public ObservableCollection<EmployeeSelectViewModel> Employees { get; }
+        }        
 
         public async Task LoadEmployeeAsync()
         {
@@ -53,6 +61,8 @@ namespace PatrolScheduler.ViewModels.EmployeeViewModels
                 Employees.Add(new EmployeeSelectViewModel(employee.Id, employee.DisplayMember, _eventAggregator));
             }
         }
-      
+
+        public ObservableCollection<EmployeeSelectViewModel> Employees { get; }
+
     }
 }

@@ -45,10 +45,7 @@ namespace PatrolScheduler.ViewModels
             EmployeeDetailViewModel = null;
         }
 
-        private void OnCreateEmployee()
-        {
-            EmployeeDetailActivated(null);
-        }
+        
 
         public async Task LoadAsync()
         {
@@ -70,6 +67,12 @@ namespace PatrolScheduler.ViewModels
         {
             EmployeeDetailViewModel = _employeeDetailViewModelFunc();
             await EmployeeDetailViewModel.LoadAsync(employeeId);
+        }
+
+
+        private void OnCreateEmployee()
+        {
+            EmployeeDetailActivated(null);
         }
 
         public ICommand CreateEmployeeCommand { get; }

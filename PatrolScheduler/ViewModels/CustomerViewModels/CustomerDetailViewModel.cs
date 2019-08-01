@@ -55,13 +55,14 @@ namespace PatrolScheduler.ViewModels
 
         private bool OnSaveCanExecute()
         {
-            //TODO: is customer valid
+            
             return Customer != null && !Customer.HasErrors;
         }
         
         public async Task LoadAsync(int? customerId)
         {
-            var customer = customerId.HasValue ? await customerDataService.GetCustomerAsync(customerId.Value) : CreateCustomer();
+            //TODO: simply this
+            var customer = customerId.HasValue ? await customerDataService.GetModelAsync(customerId.Value) : CreateCustomer();
                 
 
             Customer = new CustomerHelper(customer);

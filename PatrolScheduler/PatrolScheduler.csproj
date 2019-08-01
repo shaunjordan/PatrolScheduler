@@ -136,24 +136,27 @@
     <Compile Include="Database\GetUser_Result.cs">
       <DependentUpon>CapstoneDatabase.tt</DependentUpon>
     </Compile>
-    <Compile Include="Events\CustomerDeletedEvent.cs" />
-    <Compile Include="Events\CustomerDetailEvent.cs" />
-    <Compile Include="Events\CustomerSavedEvent.cs" />
-    <Compile Include="Events\EmployeeDeletedEvent.cs" />
-    <Compile Include="Events\EmployeeDetailEvent.cs" />
-    <Compile Include="Events\EmployeeSavedEvent.cs" />
+    <Compile Include="Events\CustomerEvents\CustomerDeletedEvent.cs" />
+    <Compile Include="Events\CustomerEvents\CustomerDetailEvent.cs" />
+    <Compile Include="Events\CustomerEvents\CustomerSavedEvent.cs" />
+    <Compile Include="Events\EmployeeEvents\EmployeeDeletedEvent.cs" />
+    <Compile Include="Events\EmployeeEvents\EmployeeDetailEvent.cs" />
+    <Compile Include="Events\EmployeeEvents\EmployeeSavedEvent.cs" />
     <Compile Include="Helpers\CustomerHelper.cs" />
     <Compile Include="Helpers\EmployeeHelper.cs" />
     <Compile Include="Helpers\ErrorValidation.cs" />
     <Compile Include="Helpers\ModelWrapper.cs" />
+    <Compile Include="Helpers\ScheduleHelper.cs" />
     <Compile Include="Models\LookupModel.cs" />
     <Compile Include="RelayCommand.cs" />
-    <Compile Include="Services\CustomerRepository.cs" />
+    <Compile Include="Services\BaseRepository.cs" />
+    <Compile Include="Services\CustomerRepo\CustomerRepository.cs" />
     <Compile Include="Services\EmployeeLookupService.cs" />
-    <Compile Include="Services\EmployeeRepository.cs" />
-    <Compile Include="Services\ICustomerRepository.cs" />
+    <Compile Include="Services\EmployeeRepo\EmployeeRepository.cs" />
+    <Compile Include="Services\IBaseRepository.cs" />
+    <Compile Include="Services\CustomerRepo\ICustomerRepository.cs" />
     <Compile Include="Services\IEmployeeLookupService.cs" />
-    <Compile Include="Services\IEmployeeRepository.cs" />
+    <Compile Include="Services\EmployeeRepo\IEmployeeRepository.cs" />
     <Compile Include="Services\ILookupService.cs" />
     <Compile Include="Services\LookupService.cs" />
     <Compile Include="ViewModels\BaseNotify.cs" />

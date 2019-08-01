@@ -13,12 +13,14 @@ namespace PatrolScheduler.Helpers
         {
         }
 
+        
         public int EmployeeId
         {
             get { return GetValue<int>(); }
             set
             {
-                SetValue(value);
+                Model.EmployeeId = value;
+                OnPropertyChanged();
             }
         }
 
