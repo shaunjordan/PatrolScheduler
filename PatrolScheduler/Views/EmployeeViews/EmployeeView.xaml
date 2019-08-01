@@ -15,8 +15,8 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
@@ -24,6 +24,6 @@
         </Grid.ColumnDefinitions>
         <local:EmployeeListView DataContext="{Binding EmployeeListViewModel}"/>
         <ContentControl Grid.Column="1" Content="{Binding EmployeeDetailViewModel}"/>
-        <Button Content="Add New Employee" Grid.Row="1" Command="{Binding CreateEmployeeCommand}"/>
+        <Button Content="Add New Employee" Grid.Row="1" Command="{Binding CreateEmployeeCommand}" VerticalAlignment="Bottom"/>
     </Grid>
 </UserControl>
