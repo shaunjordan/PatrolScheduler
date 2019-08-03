@@ -33,7 +33,6 @@ namespace PatrolScheduler.Helpers
         }
 
 
-
         public string Address1
         {
             get { return GetValue<string>(); }

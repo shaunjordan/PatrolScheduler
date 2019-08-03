@@ -142,6 +142,9 @@
     <Compile Include="Events\EmployeeEvents\EmployeeDeletedEvent.cs" />
     <Compile Include="Events\EmployeeEvents\EmployeeDetailEvent.cs" />
     <Compile Include="Events\EmployeeEvents\EmployeeSavedEvent.cs" />
+    <Compile Include="Events\ScheduleEvents\SavedScheduleEvent.cs" />
+    <Compile Include="Events\ScheduleEvents\ScheduleDeletedEvent.cs" />
+    <Compile Include="Events\ScheduleEvents\ScheduleDetailEvent.cs" />
     <Compile Include="Helpers\CustomerHelper.cs" />
     <Compile Include="Helpers\EmployeeHelper.cs" />
     <Compile Include="Helpers\ErrorValidation.cs" />
@@ -160,6 +163,8 @@
     <Compile Include="Services\EmployeeRepo\IEmployeeRepository.cs" />
     <Compile Include="Services\CustomerRepo\ILookupService.cs" />
     <Compile Include="Services\CustomerRepo\LookupService.cs" />
+    <Compile Include="Services\PatrolRepo\ICustomerToPatrolLookup.cs" />
+    <Compile Include="Services\PatrolRepo\IEmployeeToPatrolLookup.cs" />
     <Compile Include="Services\PatrolRepo\IPatrolLookup.cs" />
     <Compile Include="Services\PatrolRepo\IPatrolRepository.cs" />
     <Compile Include="Services\PatrolRepo\PatrolLookup.cs" />
@@ -182,8 +187,8 @@
     <Compile Include="ViewModels\PatrolScheduleViewModels\IPatrolScheduleDetailViewModel.cs" />
     <Compile Include="ViewModels\PatrolScheduleViewModels\PatrolScheduleDataViewModel.cs" />
     <Compile Include="ViewModels\PatrolScheduleViewModels\PatrolScheduleDetailViewModel.cs" />
+    <Compile Include="ViewModels\PatrolScheduleViewModels\PatrolScheduleSelectViewModel.cs" />
     <Compile Include="ViewModels\PatrolScheduleViewModels\PatrolScheduleViewModel.cs" />
-    <Compile Include="ViewModels\PatrolScheduleViewModels\PatrolSelectViewModel.cs" />
     <Compile Include="Views\CustomerViews\CustomerDetailView.xaml.cs">
       <DependentUpon>CustomerDetailView.xaml</DependentUpon>
     </Compile>
@@ -314,7 +319,6 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Services\ScheduleRepo\" />
     <Folder Include="ViewModels\ReportViewModels\" />
     <Folder Include="ViewModels\SearchViewModels\" />
     <Folder Include="Views\ReportViews\" />

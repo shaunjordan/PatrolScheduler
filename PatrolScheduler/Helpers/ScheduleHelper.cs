@@ -25,15 +25,6 @@ namespace PatrolScheduler.Helpers
 
         }
 
-        public int EmployeeId
-        {
-            get { return GetValue<int>(); }
-            set
-            {
-                SetValue(value);
-            }
-        }
-
         public int CustomerId
         {
             get { return GetValue<int>(); }
@@ -42,6 +33,16 @@ namespace PatrolScheduler.Helpers
                 SetValue(value);
             }
         }
+
+        public int EmployeeId
+        {
+            get { return GetValue<int>(); }
+            set
+            {
+                SetValue(value);
+            }
+        }
+                
 
         public DateTime PatrolStart
         {

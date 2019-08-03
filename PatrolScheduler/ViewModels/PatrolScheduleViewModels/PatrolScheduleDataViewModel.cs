@@ -1,7 +1,9 @@
 ﻿using PatrolScheduler.Database;
+using PatrolScheduler.Events.ScheduleEvents;
 using PatrolScheduler.Models;
 using PatrolScheduler.Services.PatrolRepo;
 using PatrolScheduler.ViewModel;
+using Prism.Commands;
 using Prism.Events;
 using System;
 using System.Collections.Generic;
@@ -9,6 +11,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace PatrolScheduler.ViewModels.PatrolScheduleViewModels
 {
@@ -22,12 +25,33 @@ namespace PatrolScheduler.ViewModels.PatrolScheduleViewModels
             this.eventAggregator = eventAggregator;
             this.patrolLookup = patrolLookup;
 
-            //Patrols = new ObservableCollection<LookupModel>();
+            //Patrols = new ObservableCollection<PatrolLookupModel>();
+            Patrols = new ObservableCollection<PatrolScheduleSelectViewModel>();
+            //EditCommand = new DelegateCommand(EditScheduleActivated);
 
-            Patrols = new ObservableCollection<PatrolLookupModel>();
+            eventAggregator.GetEvent<SavedScheduleEvent>().Subscribe(ScheduleSaved);
         }
 
-        public ObservableCollection<PatrolLookupModel> Patrols { get; }
+        private void ScheduleSaved(ScheduleSavedEventArgs obj)
+        {
+            var item = Patrols.SingleOrDefault(s => s.PatrolId == obj.PatrolId);
+            if (item == null)
+            {
+                //Patrols.Add()
+            }
+            else
+            {
+                item.CDisplayMember = obj.DisplayMember;
+            }
+        }
+
+        //private void EditScheduleActivated()
+        //{
+        //    eventAggregator.GetEvent<ScheduleDetailEvent>().Publish();
+        //}
+
+        //public ObservableCollection<PatrolLookupModel> Patrols { get; }
+        public ObservableCollection<PatrolScheduleSelectViewModel> Patrols { get; }
 
         //public async Task LoadPatrolsAsync()
         //{
@@ -43,11 +67,43 @@ namespace PatrolScheduler.ViewModels.PatrolScheduleViewModels
         {
             var lookup = await patrolLookup.PatrolLookupAsync();
             Patrols.Clear();
+            //foreach (var patrol in lookup)
+            //{
+            //    Patrols.Add(patrol);
+            //}
             foreach (var patrol in lookup)
             {
-                Patrols.Add(patrol);
+                Patrols.Add(new PatrolScheduleSelectViewModel(patrol.Id, patrol.CustomerName, patrol.EmployeeName, eventAggregator));
             }
         }
+
+        //private PatrolLookup _patrol;
+
+        //public PatrolLookup Patrol
+        //{
+        //    get { return _patrol; }
+        //    set
+        //    {
+        //        _patrol = value;
+        //        OnPropertyChanged();
+        //    }
+        //}
+
+        private PatrolLookupModel selectedPatrol;
+
+        public PatrolLookupModel SelectedPatrol
+        {
+            get { return selectedPatrol; }
+            set
+            {
+                selectedPatrol = value;
+                OnPropertyChanged();
+                eventAggregator.GetEvent<ScheduleDetailEvent>().Publish(selectedPatrol.Id);
+            }
+        }
+
+        public ICommand EditCommand { get; }
+
 
     }
 }

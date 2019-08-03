@@ -22,14 +22,21 @@
         </Grid.RowDefinitions>
         <Label Grid.Row="0" Content="Add/Edit Schedule"/>
         <Label Grid.Row="1" Content="Customer"/>
-        <ComboBox Grid.Row="2"/>
-        <Label Grid.Row="3" Content="Customer"/>
-        <ComboBox Grid.Row="4"/>
-        <Label Grid.Row="5" Content="Customer"/>
+        <ComboBox Grid.Row="2" ItemsSource="{Binding Customers}" 
+                  DisplayMemberPath="DisplayMember" 
+                  SelectedValuePath="Id" 
+                  SelectedValue="{Binding Schedule.CustomerId, Mode=TwoWay}"/>
+        <!--<TextBox Grid.Row="2" Text="{Binding Schedule.PatrolId}"/>-->
+        <Label Grid.Row="3" Content="Employee"/>
+        <ComboBox Grid.Row="4" ItemsSource="{Binding Employees}"
+                  DisplayMemberPath="DisplayMember"
+                  SelectedValuePath="Id"
+                  SelectedValue="{Binding Schedule.EmployeeId, Mode=TwoWay}"/>
+        <Label Grid.Row="5" Content="Start Date / Time"/>
         <DatePicker Grid.Row="6"/>
-        <Label Grid.Row="7" Content="Customer"/>
+        <Label Grid.Row="7" Content="End Date / Time"/>
         <DatePicker Grid.Row="8"/>
-        <Button Grid.Row="9" Content="Save"/>
-        <Button Grid.Row="10" Content="Delete"/>
+        <Button Grid.Row="9" Content="Save" Command="{Binding SaveCommand}"/>
+        <Button Grid.Row="10" Content="Delete" Command="{Binding DeleteCommand}"/>
     </Grid>
 </UserControl>

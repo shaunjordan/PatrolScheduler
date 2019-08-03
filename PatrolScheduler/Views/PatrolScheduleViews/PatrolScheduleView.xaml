@@ -15,11 +15,14 @@
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="200"/>
             <RowDefinition Height="Auto"/>
             
         </Grid.RowDefinitions>
-        <views:PatrolScheduleDataView DataContext="{Binding PatrolDataViewModel}"/>
-        <views:PatrolScheduleDetailView Grid.Row="1" DataContext="{Binding PatrolScheduleDetailViewModel}"/>
+        <Button Content="Create New Schedule" Width="200" HorizontalAlignment="Left" Command="{Binding CreateScheduleCommand}"/>
+        <views:PatrolScheduleDataView Grid.Row="1" DataContext="{Binding PatrolDataViewModel}"/>
+        <views:PatrolScheduleDetailView Grid.Row="2" DataContext="{Binding PatrolScheduleDetailViewModel}"/>
+        
     </Grid>
 </UserControl>

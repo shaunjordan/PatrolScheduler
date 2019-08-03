@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace PatrolScheduler.Services.PatrolRepo
 {
-    public class PatrolLookup : IPatrolLookup
+    public class PatrolLookup : IPatrolLookup, ICustomerToPatrolLookup, IEmployeeToPatrolLookup
     {
         private Func<CapstoneDatabase> _context;
 
@@ -18,7 +18,7 @@ namespace PatrolScheduler.Services.PatrolRepo
             _context = context;
         }
 
-        public async Task<List<PatrolLookupModel>> PatrolLookupAsync()
+        public async Task<IEnumerable<PatrolLookupModel>> PatrolLookupAsync()
         {
             using (var dbContext = _context())
             {
@@ -37,35 +37,37 @@ namespace PatrolScheduler.Services.PatrolRepo
 
                 return await result.ToListAsync();
 
-                //return await (from patrols in dbContext.CapstonePatrols
-                //              join cust in dbContext.CapstoneCustomers on patrols.CustomerId equals cust.CustomerId
-                //              join emp in dbContext.CapstoneEmployees on patrols.EmployeeId equals emp.EmployeeId
-                //              select new
-                //              {
-                //                  cust.CustomerName,
-                //                  emp.FirstName,
-                //                  Patrol = patrols.CapstoneCustomer
-                //             }).ToListAsync();
-
-               
-                //return await dbContext.CapstonePatrols.AsNoTracking().Select(patrol => new LookupModel
-                //{
-                //    Id = patrol.PatrolId,
-                //    DisplayMember = "Patrol"
-                //}).ToListAsync();
             }
         }
 
-        /*
-         * private Func<CapstoneDatabase> _context;
 
-        public PatrolLookupModel(Func<CapstoneDatabase> context)
+        public async Task<IEnumerable<LookupModel>> GetCustomerDetails()
         {
-            _context = context;
+            using (var dbContext = _context())
+            {
+
+                return await dbContext.CapstoneCustomers.AsNoTracking().Select(customer => new LookupModel
+                {
+                    Id = customer.CustomerId,
+                    DisplayMember = customer.CustomerName
+                }).ToListAsync(); ;
+
+            }
         }
 
-        public async Task<IEnumerable<Patrol>>
-         * 
-         */
+        public async Task<IEnumerable<LookupModel>> GetEmployeeDetails()
+        {
+            using (var dbContext = _context())
+            {
+
+                return await dbContext.CapstoneEmployees.AsNoTracking().Select(emp => new LookupModel
+                {
+                    Id = emp.EmployeeId,
+                    DisplayMember = emp.FirstName + " " + emp.LastName
+                }).ToListAsync(); ;
+
+            }
+        }
+
     }
 }

@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using PatrolScheduler.Models;
 
 namespace PatrolScheduler.Services.PatrolRepo
 {
-    public interface IPatrolLookup
+    public interface ICustomerToPatrolLookup
     {
-        Task<IEnumerable<PatrolLookupModel>> PatrolLookupAsync();
+        Task<IEnumerable<LookupModel>> GetCustomerDetails();
+        
     }
 }
