@@ -148,6 +148,7 @@
     <Compile Include="Helpers\ModelWrapper.cs" />
     <Compile Include="Helpers\ScheduleHelper.cs" />
     <Compile Include="Models\LookupModel.cs" />
+    <Compile Include="Models\PatrolLookupModel.cs" />
     <Compile Include="RelayCommand.cs" />
     <Compile Include="Services\BaseRepository.cs" />
     <Compile Include="Services\CustomerRepo\CustomerRepository.cs" />
@@ -159,6 +160,10 @@
     <Compile Include="Services\EmployeeRepo\IEmployeeRepository.cs" />
     <Compile Include="Services\CustomerRepo\ILookupService.cs" />
     <Compile Include="Services\CustomerRepo\LookupService.cs" />
+    <Compile Include="Services\PatrolRepo\IPatrolLookup.cs" />
+    <Compile Include="Services\PatrolRepo\IPatrolRepository.cs" />
+    <Compile Include="Services\PatrolRepo\PatrolLookup.cs" />
+    <Compile Include="Services\PatrolRepo\PatrolRepository.cs" />
     <Compile Include="ViewModels\BaseNotify.cs" />
     <Compile Include="ViewModels\CustomerViewModels\CustomerDetailViewModel.cs" />
     <Compile Include="ViewModels\CustomerViewModels\CustomerListViewModel.cs" />
@@ -173,9 +178,12 @@
     <Compile Include="ViewModels\CustomerViewModels\ICustomerDetailViewModel.cs" />
     <Compile Include="ViewModels\CustomerViewModels\ICustomerListViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\PatrolScheduleViewModels\IPatrolScheduleDataViewModel.cs" />
     <Compile Include="ViewModels\PatrolScheduleViewModels\IPatrolScheduleDetailViewModel.cs" />
     <Compile Include="ViewModels\PatrolScheduleViewModels\PatrolScheduleDataViewModel.cs" />
     <Compile Include="ViewModels\PatrolScheduleViewModels\PatrolScheduleDetailViewModel.cs" />
+    <Compile Include="ViewModels\PatrolScheduleViewModels\PatrolScheduleViewModel.cs" />
+    <Compile Include="ViewModels\PatrolScheduleViewModels\PatrolSelectViewModel.cs" />
     <Compile Include="Views\CustomerViews\CustomerDetailView.xaml.cs">
       <DependentUpon>CustomerDetailView.xaml</DependentUpon>
     </Compile>
@@ -205,6 +213,9 @@
     </Compile>
     <Compile Include="Views\PatrolScheduleViews\PatrolScheduleView.xaml.cs">
       <DependentUpon>PatrolScheduleView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SearchViews\SearchView.xaml.cs">
+      <DependentUpon>SearchView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -258,6 +269,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\SearchViews\SearchView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -300,6 +315,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Services\ScheduleRepo\" />
+    <Folder Include="ViewModels\ReportViewModels\" />
+    <Folder Include="ViewModels\SearchViewModels\" />
+    <Folder Include="Views\ReportViews\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Database\CapstoneDatabase.Context.tt">

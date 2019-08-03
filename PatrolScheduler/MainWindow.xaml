@@ -7,7 +7,7 @@
         xmlns:viewmodels="clr-namespace:PatrolScheduler.ViewModels"
         xmlns:views="clr-namespace:PatrolScheduler.Views"
         mc:Ignorable="d"
-        Title="PatrolScheduler" Height="450" Width="800">
+        Title="PatrolScheduler" Height="600" Width="800">
     <Window.Resources>
         <DataTemplate x:Name="customerViewTemplate" DataType="{x:Type viewmodels:CustomerViewModel}">
         
@@ -30,7 +30,7 @@
                 <MenuItem Header="Manage">
                     <MenuItem Header="Customers" Command="{Binding SelectCustomerView}"/>
                     <MenuItem Header="Employees" Command="{Binding SelectEmployeeView}"/>
-                    <MenuItem Header="Patrol Schedules" Command="{Binding SelectePatrolView}"/>
+                    <MenuItem Header="Patrol Schedules" Command="{Binding SelectScheduleView}"/>
                     <MenuItem Header="Patrol Cars"/>
                 </MenuItem>
             </Menu>

@@ -24,5 +24,6 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>          
         </ScrollViewer>
+        <!--<DataGrid ItemsSource="{Binding Customers}"></DataGrid>-->
     </Grid>
 </UserControl>

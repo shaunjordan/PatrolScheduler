@@ -17,8 +17,8 @@ namespace PatrolScheduler.Database
         public int PatrolId { get; set; }
         public Nullable<int> EmployeeId { get; set; }
         public Nullable<int> CustomerId { get; set; }
-        public Nullable<System.DateTime> PatrolStart { get; set; }
-        public Nullable<System.DateTime> PatrolEnd { get; set; }
+        public System.DateTime PatrolStart { get; set; }
+        public System.DateTime PatrolEnd { get; set; }
     
         public virtual CapstoneCustomer CapstoneCustomer { get; set; }
         public virtual CapstoneEmployee CapstoneEmployee { get; set; }

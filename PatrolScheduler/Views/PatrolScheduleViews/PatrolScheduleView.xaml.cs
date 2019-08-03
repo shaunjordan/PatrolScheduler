@@ -1,4 +1,7 @@
-﻿using System;
+﻿using PatrolScheduler.Services.PatrolRepo;
+using PatrolScheduler.ViewModels.PatrolScheduleViewModels;
+using Prism.Events;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +23,38 @@ namespace PatrolScheduler.Views
     /// </summary>
     public partial class PatrolScheduleView : UserControl
     {
-        public PatrolScheduleView()
+        private IPatrolScheduleDataViewModel PatrolScheduleDataViewModel;
+        private IPatrolRepository PatrolRepository;
+        private Func<IPatrolScheduleDetailViewModel> PatrolScheduleDetailViewModel;
+        private IEventAggregator EventAggregator;
+        private PatrolScheduleViewModel _patrolScheduleViewModel;
+
+        public PatrolScheduleView(IPatrolScheduleDataViewModel _patrolScheduleDataViewModel,
+            IPatrolRepository _patrolRepository,
+            Func<IPatrolScheduleDetailViewModel> _patrolScheduleDetailViewModel, 
+            IEventAggregator _eventAggregator)
         {
             InitializeComponent();
+
+            PatrolRepository = _patrolRepository;
+            PatrolScheduleDataViewModel = _patrolScheduleDataViewModel;
+            PatrolScheduleDetailViewModel = _patrolScheduleDetailViewModel;
+            EventAggregator = _eventAggregator;
+
+            _patrolScheduleViewModel = new PatrolScheduleViewModel(_patrolScheduleDataViewModel,
+                _patrolRepository,
+                _patrolScheduleDetailViewModel,
+                _eventAggregator);
+
+            DataContext = _patrolScheduleViewModel;
+
+            Loaded += PatrolScheduleView_Loaded;
+
+        }
+
+        private async void PatrolScheduleView_Loaded(object sender, RoutedEventArgs e)
+        {
+            await _patrolScheduleViewModel.LoadAsync();
         }
     }
 }

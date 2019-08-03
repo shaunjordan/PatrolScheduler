@@ -35,8 +35,8 @@
           <Property Name="PatrolId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="EmployeeId" Type="int" />
           <Property Name="CustomerId" Type="int" />
-          <Property Name="PatrolStart" Type="datetime" Precision="0" />
-          <Property Name="PatrolEnd" Type="datetime" Precision="0" />
+          <Property Name="PatrolStart" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="PatrolEnd" Type="datetime" Precision="0" Nullable="false" />
         </EntityType>
         <EntityType Name="CapstonePatrolCar">
           <Key>
@@ -133,8 +133,8 @@
           <Property Name="PatrolId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="EmployeeId" Type="Int32" />
           <Property Name="CustomerId" Type="Int32" />
-          <Property Name="PatrolStart" Type="DateTime" />
-          <Property Name="PatrolEnd" Type="DateTime" />
+          <Property Name="PatrolStart" Type="DateTime" Nullable="false" />
+          <Property Name="PatrolEnd" Type="DateTime" Nullable="false" />
           <NavigationProperty Name="CapstoneCustomer" Relationship="Self.CapstonePatrol_ibfk_2" FromRole="CapstonePatrol" ToRole="CapstoneCustomer" />
           <NavigationProperty Name="CapstoneEmployee" Relationship="Self.CapstonePatrol_ibfk_1" FromRole="CapstonePatrol" ToRole="CapstoneEmployee" />
         </EntityType>

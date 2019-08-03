@@ -1,4 +1,6 @@
 ﻿using PatrolScheduler.Database;
+using PatrolScheduler.Models;
+using PatrolScheduler.Services.PatrolRepo;
 using PatrolScheduler.ViewModel;
 using Prism.Events;
 using System;
@@ -10,21 +12,42 @@ using System.Threading.Tasks;
 
 namespace PatrolScheduler.ViewModels.PatrolScheduleViewModels
 {
-    public class PatrolScheduleDataViewModel : BaseNotify
+    public class PatrolScheduleDataViewModel : BaseNotify, IPatrolScheduleDataViewModel
     {
         private IEventAggregator eventAggregator;
+        private IPatrolLookup patrolLookup;
 
-        public PatrolScheduleDataViewModel(IEventAggregator eventAggregator)
+        public PatrolScheduleDataViewModel(IPatrolLookup patrolLookup,IEventAggregator eventAggregator)
         {
             this.eventAggregator = eventAggregator;
-            Patrols = new ObservableCollection<CapstonePatrol>();
+            this.patrolLookup = patrolLookup;
+
+            //Patrols = new ObservableCollection<LookupModel>();
+
+            Patrols = new ObservableCollection<PatrolLookupModel>();
         }
 
-        public ObservableCollection<CapstonePatrol> Patrols { get; }
+        public ObservableCollection<PatrolLookupModel> Patrols { get; }
+
+        //public async Task LoadPatrolsAsync()
+        //{
+        //    var lookup = await patrolLookup.PatrolLookupAsync();
+        //    Patrols.Clear();
+        //    foreach (var patrol in lookup)
+        //    {
+        //        Patrols.Add(patrol);
+        //    }
+        //}
 
         public async Task LoadPatrolsAsync()
         {
-            //implement
+            var lookup = await patrolLookup.PatrolLookupAsync();
+            Patrols.Clear();
+            foreach (var patrol in lookup)
+            {
+                Patrols.Add(patrol);
+            }
         }
+
     }
 }

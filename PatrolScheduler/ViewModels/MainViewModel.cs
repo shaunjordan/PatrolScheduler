@@ -1,7 +1,9 @@
 ﻿using PatrolScheduler.Database;
 using PatrolScheduler.Services;
+using PatrolScheduler.Services.PatrolRepo;
 using PatrolScheduler.ViewModels;
 using PatrolScheduler.ViewModels.EmployeeViewModels;
+using PatrolScheduler.ViewModels.PatrolScheduleViewModels;
 using PatrolScheduler.Views;
 using Prism.Events;
 using System;
@@ -24,6 +26,7 @@ namespace PatrolScheduler.ViewModel
         private CustomerView _custView;
         private EmployeeView _employeeView;
         private PatrolScheduleView _scheduleView;
+        
         
         public ICommand SelectCustomerView { get; private set; }
         public ICommand SelectEmployeeView { get; private set; }
@@ -49,12 +52,16 @@ namespace PatrolScheduler.ViewModel
             Func<ICustomerDetailViewModel> _customerDetailViewModel,
             IEmployeeRepository _employeeDataService,
             IEmployeeListViewModel _employeeListViewModel,
-            Func<IEmployeeDetailViewModel> _employeeDetailViewModel,IEventAggregator _eventAggregator)
+            Func<IEmployeeDetailViewModel> _employeeDetailViewModel,
+            IEventAggregator _eventAggregator, 
+            IPatrolScheduleDataViewModel _patrolScheduleDataViewModel,
+            IPatrolRepository _patrolRepository,
+            Func<IPatrolScheduleDetailViewModel> _patrolScheduleDetailViewModel)
         {
             
             _custView = new CustomerView(_customerListViewModel, _customerDataService, _customerDetailViewModel, _eventAggregator);
             _employeeView = new EmployeeView(_employeeListViewModel, _employeeDataService, _employeeDetailViewModel, _eventAggregator);
-            _scheduleView = new PatrolScheduleView();
+            _scheduleView = new PatrolScheduleView(_patrolScheduleDataViewModel, _patrolRepository, _patrolScheduleDetailViewModel, _eventAggregator);
             
             SelectCustomerView = new RelayCommand(() => SelectedView = _custView);
             SelectEmployeeView = new RelayCommand(() => SelectedView = _employeeView);
