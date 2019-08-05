@@ -12,7 +12,7 @@
             <local:CustomerDetailView/>
         </DataTemplate>
     </UserControl.Resources>
-    <Grid>
+    <Grid Margin="20">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -25,6 +25,6 @@
         <!--TODO: REMOVE THIS COMMENT-->
         <local:CustomerListView  DataContext="{Binding CustomerListViewModel}"/>
         <ContentControl Grid.Column="1" Content="{Binding CustomerDetailViewModel}"/>
-        <Button Content="Add New Customer" Grid.Row="1" Command="{Binding CreateCustomerCommand}"/>
+        <Button Content="Add New Customer" Width="150" Margin="5" Grid.Row="1" Command="{Binding CreateCustomerCommand}"/>
     </Grid>
 </UserControl>

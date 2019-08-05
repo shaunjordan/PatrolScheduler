@@ -89,7 +89,35 @@ namespace PatrolScheduler.Helpers
                         yield return "Customer Name is required";
                     }
                     break;
-            }
+                case nameof(Address1):
+                    if (String.IsNullOrWhiteSpace(Address1))
+                    {
+                        yield return "Address 1 is required";
+                    }
+                    break;
+                case nameof(City):
+                    if (String.IsNullOrWhiteSpace(Address1))
+                    {
+                        yield return "City is required";
+                    }
+                    break;
+                case nameof(State):
+                    if (String.IsNullOrWhiteSpace(State))
+                    {
+                        yield return "State is required";
+                    }
+                    if (State.Length != 2)
+                    {
+                        yield return "State must be 2 characters";
+                    }
+                    break;
+                case nameof(ZipCode):
+                    if (String.IsNullOrWhiteSpace(Address1))
+                    {
+                        yield return "Zip code is required";
+                    }
+                    break;
+            }   
         }
     }
 }

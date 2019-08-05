@@ -20,32 +20,32 @@ namespace PatrolScheduler
         private void Application_Startup(object sender, StartupEventArgs e)
         {
 
-            //try
-            //{
-            //    if (new LoginWindow().ShowDialog() == true)
-            //    {
-            //        var bootstrap = new Bootstrap();
-            //        var container = bootstrap.Bootstrapper();
+            try
+            {
+                if (new LoginWindow().ShowDialog() == true)
+                {
+                    var bootstrap = new Bootstrap();
+                    var container = bootstrap.Bootstrapper();
 
-            //        var mainWindow = container.Resolve<MainWindow>();
-
-
-            //        mainWindow.ShowDialog();
-            //    }
-            //}
-            //finally
-            //{
-
-            //    Shutdown();
-            //}
-
-            var bootstrap = new Bootstrap();
-            var container = bootstrap.Bootstrapper();
-
-            var mainWindow = container.Resolve<MainWindow>();
+                    var mainWindow = container.Resolve<MainWindow>();
 
 
-            mainWindow.Show();
+                    mainWindow.ShowDialog();
+                }
+            }
+            finally
+            {
+
+                Shutdown();
+            }
+
+            //var bootstrap = new Bootstrap();
+            //var container = bootstrap.Bootstrapper();
+
+            //var mainWindow = container.Resolve<MainWindow>();
+
+
+            //mainWindow.Show();
         }
 
         private void Application_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)

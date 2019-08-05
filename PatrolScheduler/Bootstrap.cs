@@ -2,10 +2,12 @@
 using PatrolScheduler.Database;
 using PatrolScheduler.Services;
 using PatrolScheduler.Services.PatrolRepo;
+using PatrolScheduler.Services.ReportServices;
 using PatrolScheduler.ViewModel;
 using PatrolScheduler.ViewModels;
 using PatrolScheduler.ViewModels.EmployeeViewModels;
 using PatrolScheduler.ViewModels.PatrolScheduleViewModels;
+using PatrolScheduler.ViewModels.SearchViewModels;
 using Prism.Events;
 using System;
 using System.Collections.Generic;
@@ -33,6 +35,7 @@ namespace PatrolScheduler
             builder.RegisterType<LookupService>().AsImplementedInterfaces();
             builder.RegisterType<EmployeeLookupService>().AsImplementedInterfaces();
             builder.RegisterType<PatrolLookup>().AsImplementedInterfaces();
+            builder.RegisterType<EmpScheduleReport>().AsImplementedInterfaces();
 
             builder.RegisterType<CustomerDetailViewModel>().As<ICustomerDetailViewModel>();
             builder.RegisterType<CustomerListViewModel>().As<ICustomerListViewModel>();
@@ -46,6 +49,7 @@ namespace PatrolScheduler
             builder.RegisterType<EmployeeViewModel>().AsSelf();
             builder.RegisterType<CustomerViewModel>().AsSelf();
             builder.RegisterType<PatrolScheduleViewModel>().AsSelf();
+            builder.RegisterType<SearchViewModel>().As<ISearchViewModel>();
 
             builder.RegisterType<CapstoneDatabase>().AsSelf();
 

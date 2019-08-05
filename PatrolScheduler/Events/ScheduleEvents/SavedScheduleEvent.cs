@@ -14,6 +14,9 @@ namespace PatrolScheduler.Events.ScheduleEvents
     public class ScheduleSavedEventArgs
     {
         public int PatrolId { get; set; }
-        public string DisplayMember { get; set; }
+        public string CustomerName { get; set; }
+        public string EmployeeName { get; set; }
+        public DateTime PatrolStart { get; set; }
+        public DateTime PatrolEnd { get; set; }
     }
 }

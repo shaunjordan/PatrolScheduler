@@ -61,7 +61,7 @@ namespace PatrolScheduler.ViewModels
         
         public async Task LoadAsync(int? customerId)
         {
-            //TODO: simply this
+            //TODO: simplify this
             var customer = customerId.HasValue ? await customerDataService.GetModelAsync(customerId.Value) : CreateCustomer();
                 
 
@@ -80,6 +80,10 @@ namespace PatrolScheduler.ViewModels
             if (Customer.CustomerId == 0)
             {
                 Customer.CustomerName = "";
+                Customer.Address1 = "";
+                Customer.City = "";
+                Customer.State = "";
+                Customer.ZipCode = "";
             }
         }
 

@@ -5,17 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PatrolScheduler"
         xmlns:viewmodels="clr-namespace:PatrolScheduler.ViewModels"
+        xmlns:viewmodelsPatrol="clr-namespace:PatrolScheduler.ViewModels.PatrolScheduleViewModels"
         xmlns:views="clr-namespace:PatrolScheduler.Views"
+        xmlns:viewsPatrol="clr-namespace:PatrolScheduler.Views.PatrolScheduleViews"
         mc:Ignorable="d"
         Title="PatrolScheduler" Height="600" Width="800">
     <Window.Resources>
         <DataTemplate x:Name="customerViewTemplate" DataType="{x:Type viewmodels:CustomerViewModel}">
-        
-            <!--<views:CustomerView DataContext="{Binding}"/>-->
+                       
         </DataTemplate>
         <DataTemplate x:Name="employeeDataTemplate" DataType="{x:Type viewmodels:EmployeeViewModel}"></DataTemplate>
-        <!--<DataTemplate x:Name="employeeViewTemplate" DataType="{x:Type viewmodels:EmployeeViewModel}"></DataTemplate>-->
-        <!--<DataTemplate x:Name="employeeViewTemplate" DataType="{x:Type viewmodels:EmployeeViewModel}"></DataTemplate>-->
+        <DataTemplate x:Name="patrolViewTemplate" DataType="{x:Type viewmodelsPatrol:PatrolScheduleViewModel}"/>
+
     </Window.Resources>    
     <Grid>
         <Grid.RowDefinitions>
@@ -31,11 +32,18 @@
                     <MenuItem Header="Customers" Command="{Binding SelectCustomerView}"/>
                     <MenuItem Header="Employees" Command="{Binding SelectEmployeeView}"/>
                     <MenuItem Header="Patrol Schedules" Command="{Binding SelectScheduleView}"/>
-                    <MenuItem Header="Patrol Cars"/>
                 </MenuItem>
+                <MenuItem Header="_Reports">
+                    <MenuItem Header="Employee Schedules" Command="{Binding GenerateEmployeeSchedules}"/>
+                    <MenuItem Header="All Customers Report" Command="{Binding GenerateCustomerReport}"/>
+                </MenuItem>
+                <MenuItem Header="_Search" Command="{Binding SelectSearchView}"></MenuItem>                    
+                
             </Menu>
 
         </DockPanel>
+        <Label Content="Welcome to Patrol Scheduler! Use the menu options to begin." Grid.Row="1"
+               HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <ContentControl Content="{Binding SelectedView}" x:Name="ContentControl" Grid.Row="1">
 
         </ContentControl>

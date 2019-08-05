@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace PatrolScheduler.Services
 {
-    public class LookupService : ILookupService
+    public class LookupService : ILookupService, ICustomersLookupReport, ICustomerSearch
     {
         private Func<CapstoneDatabase> _databaseContext;
 
@@ -27,6 +27,45 @@ namespace PatrolScheduler.Services
                     Id = customer.CustomerId,
                     DisplayMember = customer.CustomerName
                 }).ToListAsync();
+            }
+        }
+
+        public async Task<IEnumerable<CustomerReportModel>> GetCustomerReport()
+        {
+            using (var context = _databaseContext())
+            {
+                return await context.CapstoneCustomers.AsNoTracking().Select(customer => new CustomerReportModel
+                {
+                    CustomerId = customer.CustomerId,
+                    CustomerName = customer.CustomerName,
+                    Address1 = customer.Address1,
+                    Address2 = customer.Address2,
+                    City = customer.City,
+                    State = customer.State,
+                    ZipCode = customer.ZipCode
+
+                }).ToListAsync();
+            }
+        }
+
+        public async Task<IEnumerable<CustomerReportModel>> SearchCustomers(string customerName)
+        {
+            using (var context = _databaseContext())
+            {
+                var result = from c in context.CapstoneCustomers
+                             .Where(c => c.CustomerName.Contains(customerName))
+                             select new CustomerReportModel()
+                             {
+                                 CustomerId = c.CustomerId,
+                                 CustomerName = c.CustomerName,
+                                 Address1 = c.Address1,
+                                 Address2 = c.Address2,
+                                 City = c.City,
+                                 State = c.State,
+                                 ZipCode = c.ZipCode
+                             };
+
+                return await result.ToListAsync();
             }
         }
     }

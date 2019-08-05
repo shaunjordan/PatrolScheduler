@@ -68,5 +68,25 @@ namespace PatrolScheduler.Helpers
                 SetValue(value);
             }
         }
+
+        protected override IEnumerable<string> ValidateProperty(string propertyName)
+        {
+            switch (propertyName)
+            {
+                case nameof(FirstName):
+                    if (String.IsNullOrWhiteSpace(FirstName))
+                    {
+                        yield return "First Name is required";
+                    }
+                    break;
+                case nameof(LastName):
+                    if (String.IsNullOrWhiteSpace(LastName))
+                    {
+                        yield return "Last Name is required";
+                    }
+                    break;
+                
+            }
+        }
     }
 }

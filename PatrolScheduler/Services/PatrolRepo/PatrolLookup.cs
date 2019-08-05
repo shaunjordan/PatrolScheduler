@@ -30,6 +30,8 @@ namespace PatrolScheduler.Services.PatrolRepo
                              {
                                  Id = p.PatrolId,
                                  CustomerName = c.CustomerName,
+                                 CustomerId = c.CustomerId,
+                                 EmployeeId = e.EmployeeId,
                                  EmployeeName = e.FirstName + " " + e.LastName,
                                  Start = p.PatrolStart,
                                  End = p.PatrolEnd

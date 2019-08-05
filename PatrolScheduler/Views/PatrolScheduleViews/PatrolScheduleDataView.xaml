@@ -7,25 +7,19 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <DataGrid ItemsSource="{Binding Patrols}"
-                  SelectedItem="{Binding SelectedPatrol}"
+        <DataGrid x:Name="PatrolDataGrid"
+                  ItemsSource="{Binding Patrols}"
+                  SelectedItem="{Binding SelectedPatrol, Mode=TwoWay}"
                   AutoGenerateColumns="False" 
                   IsReadOnly="True" 
                   CanUserAddRows="False" 
                   CanUserDeleteRows="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Patrol Id" Width="*" Binding="{Binding Id, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                <DataGridTextColumn Header="Customer Name" Width="*" Binding="{Binding CDisplayMember, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <DataGridTextColumn Header="Customer Name" Width="*" Binding="{Binding CustomerName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 <DataGridTextColumn Header="Employee Name" Width="*" Binding="{Binding EmployeeName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 <DataGridTextColumn Header="Start Time" Width="*" Binding="{Binding Start, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                <DataGridTextColumn Header="End Time" Width="*" Binding="{Binding End, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                <DataGridTemplateColumn>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Content="Edit" Command="{Binding EditCommand}"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="End Time" Width="*" Binding="{Binding End, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>                
             </DataGrid.Columns>
         </DataGrid>        
     </Grid>

@@ -13,14 +13,14 @@
             <views:PatrolScheduleDetailView/>
         </DataTemplate>        
     </UserControl.Resources>
-    <Grid>
+    <Grid Margin="20">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="200"/>
             <RowDefinition Height="Auto"/>
             
         </Grid.RowDefinitions>
-        <Button Content="Create New Schedule" Width="200" HorizontalAlignment="Left" Command="{Binding CreateScheduleCommand}"/>
+        <Button Content="Create New Schedule" Width="150" Margin="5" HorizontalAlignment="Left" Command="{Binding CreateScheduleCommand}"/>
         <views:PatrolScheduleDataView Grid.Row="1" DataContext="{Binding PatrolDataViewModel}"/>
         <views:PatrolScheduleDetailView Grid.Row="2" DataContext="{Binding PatrolScheduleDetailViewModel}"/>
         

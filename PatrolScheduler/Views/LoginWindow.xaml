@@ -9,7 +9,7 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -21,13 +21,21 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Label Grid.Column="1" Grid.Row="1" Content="User Name" VerticalAlignment="Center"/>
-        <TextBox x:Name="UserName" Grid.Column="1" Grid.Row="2"></TextBox>
-
-        <Label Grid.Column="1" Grid.Row="3" Content="Password"/>
-        <TextBox x:Name="Password" Grid.Column="1" Grid.Row="4"></TextBox>
+        <Label Grid.Row="1" Grid.Column="1" Content="Patrol Scheduler" HorizontalAlignment="Center"
+               FontSize="36" FontFamily="Franklin Gothic" FontWeight="ExtraBold"
+               Foreground="MidnightBlue"
+               Margin="0 0 0 10"></Label>
         
-        <Button x:Name="Login" Grid.Column="1" Grid.Row="5" Content="Login" Click="Login_Click"/>
+        <Label Grid.Column="1" Grid.Row="2" Content="User Name" VerticalAlignment="Center"/>
+        <TextBox x:Name="UserName" Grid.Column="1" Grid.Row="3" BorderBrush="MidnightBlue"
+                 Margin="0 0 0 25"></TextBox>
+
+        <Label Grid.Column="1" Grid.Row="4" Content="Password"/>
+        <PasswordBox x:Name="Password" Grid.Column="1" Grid.Row="5" 
+                     BorderBrush="MidnightBlue"
+                     Margin="0 0 0 25"></PasswordBox>
+        
+        <Button x:Name="Login" Grid.Column="1" Grid.Row="6" Content="Login" Click="Login_Click"/>
 
     </Grid>
 </Window>

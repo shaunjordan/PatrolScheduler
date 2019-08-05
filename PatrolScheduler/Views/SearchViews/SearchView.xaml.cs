@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PatrolScheduler.ViewModels.SearchViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,11 @@ namespace PatrolScheduler.Views.SearchViews
     /// </summary>
     public partial class SearchView : UserControl
     {
-        public SearchView()
+        public SearchView(ISearchViewModel _searchViewModel)
         {
             InitializeComponent();
+
+            DataContext = _searchViewModel;
         }
     }
 }

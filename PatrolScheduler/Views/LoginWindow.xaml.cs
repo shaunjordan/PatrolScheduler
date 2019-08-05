@@ -28,7 +28,7 @@ namespace PatrolScheduler.Views
         private void Login_Click(object sender, RoutedEventArgs e)
         {
             string user = UserName.Text;
-            string pass = Password.Text;
+            string pass = Password.ToString();
 
             //if (user == "test" && pass == "test")
             //{

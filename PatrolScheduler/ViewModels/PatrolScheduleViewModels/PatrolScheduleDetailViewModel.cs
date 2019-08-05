@@ -98,6 +98,12 @@ namespace PatrolScheduler.ViewModels.PatrolScheduleViewModels
 
             ((DelegateCommand)SaveCommand).RaiseCanExecuteChanged();
 
+            if (Schedule.PatrolId == 0)
+            {
+                Schedule.PatrolStart = DateTime.Now;
+                Schedule.PatrolEnd = DateTime.Now.AddDays(1);
+            }
+
             Customers.Clear();
             Employees.Clear();
 

@@ -50,6 +50,10 @@ namespace PatrolScheduler.Helpers
             set
             {
                 SetValue(value);
+                if (PatrolEnd < PatrolStart)
+                {
+                    PatrolEnd = PatrolStart;
+                }
             }
         }
 
@@ -59,6 +63,30 @@ namespace PatrolScheduler.Helpers
             set
             {
                 SetValue(value);
+                if (PatrolEnd < PatrolStart)
+                {
+                    PatrolStart = PatrolEnd;
+                }
+            }
+        }
+
+        protected override IEnumerable<string> ValidateProperty(string propertyName)
+        {
+            switch (propertyName)
+            {
+                case nameof(PatrolStart):
+                    if (PatrolStart > PatrolEnd)
+                    {
+                        yield return "Start date cannot be after end date";
+                    }
+                    break;
+                //case nameof(PatrolEnd):
+                //    if (String.IsNullOrWhiteSpace(PatrolEnd))
+                //    {
+                //        yield return "Last Name is required";
+                //    }
+                //    break;
+
             }
         }
     }

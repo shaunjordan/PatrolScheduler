@@ -12,7 +12,7 @@
             <local:EmployeeDetailView/>
         </DataTemplate>
     </UserControl.Resources>
-    <Grid>
+    <Grid Margin="20">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -24,6 +24,6 @@
         </Grid.ColumnDefinitions>
         <local:EmployeeListView DataContext="{Binding EmployeeListViewModel}"/>
         <ContentControl Grid.Column="1" Content="{Binding EmployeeDetailViewModel}"/>
-        <Button Content="Add New Employee" Grid.Row="1" Command="{Binding CreateEmployeeCommand}" VerticalAlignment="Bottom"/>
+        <Button Content="Add New Employee" Width="150" Margin="5"  Grid.Row="1" Command="{Binding CreateEmployeeCommand}" VerticalAlignment="Bottom"/>
     </Grid>
 </UserControl>
