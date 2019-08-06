@@ -15,20 +15,38 @@ namespace PatrolScheduler.ViewModels.SearchViewModels
     public class SearchViewModel : BaseNotify, ISearchViewModel
     {        
         
+        private ICustomerSearch _customerLookup;
+        private IEmployeeSearch _employeeSearch;
 
-        public SearchViewModel(ICustomerSearch customerLookup)
+        public SearchViewModel(ICustomerSearch customerLookup, IEmployeeSearch employeeSearch)
         {
             _customerLookup = customerLookup;
+            _employeeSearch = employeeSearch;
 
             SearchCommand = new DelegateCommand(async () => await PopulateResults());
+            SearchEmployees = new DelegateCommand(async () => await PopulateEmployees());
         
             Customers = new ObservableCollection<CustomerReportModel>();
+            Employees = new ObservableCollection<EmployeeSearchModel>();
+
+            EmpSearch = "Enter employee name";
+            Search = "Enter customer name";
         }
 
-        private ICustomerSearch _customerLookup;
+        private async Task PopulateEmployees()
+        {
+            var lookup = await _employeeSearch.SearchEmployees(EmpSearch);
+            Employees.Clear();
+            foreach (var item in lookup)
+            {
+                Employees.Add(item);
+            }
+        }
+
 
         public ObservableCollection<CustomerReportModel> Customers { get; }
-        
+        public ObservableCollection<EmployeeSearchModel> Employees { get; }
+
         public async Task PopulateResults()
         {
             var lookup = await _customerLookup.SearchCustomers(Search);
@@ -47,6 +65,20 @@ namespace PatrolScheduler.ViewModels.SearchViewModels
             set { _search = value; OnPropertyChanged(); }
         }
 
+        private string _empSearch;
+
+        public string EmpSearch
+        {
+            get { return _empSearch; }
+            set
+            {
+                _empSearch = value;
+                OnPropertyChanged();
+            }
+        }
+
+
         public ICommand SearchCommand { get; }
+        public ICommand SearchEmployees { get; }
     }
 }

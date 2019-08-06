@@ -199,6 +199,7 @@
     <Compile Include="Helpers\ModelWrapper.cs" />
     <Compile Include="Helpers\ScheduleHelper.cs" />
     <Compile Include="Models\CustomerReportModel.cs" />
+    <Compile Include="Models\EmployeeSearchModel.cs" />
     <Compile Include="Models\EmpScheduleModel.cs" />
     <Compile Include="Models\LookupModel.cs" />
     <Compile Include="Models\PatrolLookupModel.cs" />
@@ -207,6 +208,7 @@
     <Compile Include="Services\CustomerRepo\CustomerRepository.cs" />
     <Compile Include="Services\CustomerRepo\ICustomerSearch.cs" />
     <Compile Include="Services\CustomerRepo\ICustomersLookupReport.cs" />
+    <Compile Include="Services\CustomerRepo\IEmployeeSearch.cs" />
     <Compile Include="Services\EmployeeRepo\EmployeeLookupService.cs" />
     <Compile Include="Services\EmployeeRepo\EmployeeRepository.cs" />
     <Compile Include="Services\IBaseRepository.cs" />

@@ -28,18 +28,13 @@ namespace PatrolScheduler.Views
         private void Login_Click(object sender, RoutedEventArgs e)
         {
             string user = UserName.Text;
-            string pass = Password.ToString();
-
-            //if (user == "test" && pass == "test")
-            //{
-            //    this.DialogResult = true;
-            //    this.Close();
-            //}
+            string pass = Password.Password;
+            
 
             using (var context = new CapstoneDatabase())
             {
                 var result = context.GetUser(user, pass);
-                if (result != null)
+                if (result.Count() != 0)
                 {
                     this.DialogResult = true;
                     this.Close();

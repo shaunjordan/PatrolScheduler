@@ -40,6 +40,8 @@ namespace PatrolScheduler.ViewModels.PatrolScheduleViewModels
 
             Customers = new ObservableCollection<LookupModel>();
             Employees = new ObservableCollection<LookupModel>();
+
+            
             
         }
 

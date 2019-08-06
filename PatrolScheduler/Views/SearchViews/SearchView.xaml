@@ -10,11 +10,19 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal">
             <TextBox Width="200" Margin="0 0 5 5" Text="{Binding Search, Mode=TwoWay}"></TextBox>
-            <Button Content="Search" Margin="0 0 0 5" HorizontalAlignment="Right" Command="{Binding SearchCommand}"/>
+            <Button Content="Search Customers" Margin="0 0 0 5" HorizontalAlignment="Right" Command="{Binding SearchCommand}"/>
         </StackPanel>
-        <DataGrid IsReadOnly="True" Grid.Row="1" ItemsSource="{Binding Customers}"></DataGrid>
+        <DataGrid IsReadOnly="True" Grid.Row="1" ItemsSource="{Binding Customers}" Margin="0 0 0 20"></DataGrid>
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <TextBox Width="200" Margin="0 0 5 5" Text="{Binding EmpSearch, Mode=TwoWay}"></TextBox>
+            <Button Content="Search Employees" Margin="0 0 0 5" HorizontalAlignment="Right" Command="{Binding SearchEmployees}"/>
+        </StackPanel>
+        <DataGrid IsReadOnly="True" Grid.Row="3" ItemsSource="{Binding Employees}"></DataGrid>
     </Grid>
 </UserControl>

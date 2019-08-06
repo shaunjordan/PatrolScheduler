@@ -41,5 +41,73 @@ namespace PatrolScheduler.Tests
             Assert.AreEqual(expected, actual);
         }
 
+
+        [TestMethod]
+        public void EmployeesShouldAddToDataBase()
+        {
+            int expected = 6; //total of employees in the database currently is 5
+             
+            ObservableCollection<CapstoneEmployee> Employees = new ObservableCollection<CapstoneEmployee>();
+            CapstoneEmployee testEmp = new CapstoneEmployee()
+            {
+                
+                FirstName = "Test",
+                LastName = "Test",
+                HireDate = DateTime.Parse("01/01/2019")
+            };
+
+            using (var ctx = new CapstoneDatabase())
+            {
+                ctx.CapstoneEmployees.Add(testEmp);
+                ctx.SaveChanges();
+            }
+
+            using (var ctx = new CapstoneDatabase())
+            {
+
+                foreach (var emp in ctx.CapstoneEmployees)
+                {
+                    Employees.Add(emp);
+                }
+
+            }
+
+
+            int actual = Employees.Count;
+
+            Assert.AreEqual(expected, actual);
+
+        }
+
+        [TestMethod]
+        public void EmployeeShouldBeDeletedFromTheDatabase()
+        {
+            int expected = 5; //total of employees in the database currently is 6
+
+            ObservableCollection<CapstoneEmployee> Employees = new ObservableCollection<CapstoneEmployee>();
+            
+
+            using (var ctx = new CapstoneDatabase())
+            {
+                ctx.CapstoneEmployees.Remove(ctx.CapstoneEmployees.Single(a => a.FirstName == "Test"));
+                ctx.SaveChanges();
+            }
+
+            using (var ctx = new CapstoneDatabase())
+            {
+
+                foreach (var emp in ctx.CapstoneEmployees)
+                {
+                    Employees.Add(emp);
+                }
+
+            }
+
+
+            int actual = Employees.Count;
+
+            Assert.AreEqual(expected, actual);
+        }
+
     }
 }

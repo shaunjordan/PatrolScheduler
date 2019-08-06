@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace PatrolScheduler.Services
 {
-    public class LookupService : ILookupService, ICustomersLookupReport, ICustomerSearch
+    public class LookupService : ILookupService, ICustomersLookupReport, ICustomerSearch, IEmployeeSearch
     {
         private Func<CapstoneDatabase> _databaseContext;
 
@@ -63,6 +63,25 @@ namespace PatrolScheduler.Services
                                  City = c.City,
                                  State = c.State,
                                  ZipCode = c.ZipCode
+                             };
+
+                return await result.ToListAsync();
+            }
+        }
+
+        public async Task<IEnumerable<EmployeeSearchModel>> SearchEmployees(string empName)
+        {
+            using (var context = _databaseContext())
+            {
+                var result = from e in context.CapstoneEmployees
+                             .Where(e => e.FirstName.Contains(empName))                             
+                             select new EmployeeSearchModel()
+                             {
+                                 EmployeeId = e.EmployeeId,
+                                 FirstName = e.FirstName,
+                                 LastName = e.LastName,
+                                 BadgeNumber = e.BadgeNumber.Value,
+                                 HireDate = e.HireDate.Value
                              };
 
                 return await result.ToListAsync();

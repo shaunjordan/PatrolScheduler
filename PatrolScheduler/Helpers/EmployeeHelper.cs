@@ -11,6 +11,7 @@ namespace PatrolScheduler.Helpers
     {
         public EmployeeHelper(CapstoneEmployee model) : base(model)
         {
+            
         }
 
         

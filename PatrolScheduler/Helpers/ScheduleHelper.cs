@@ -12,6 +12,7 @@ namespace PatrolScheduler.Helpers
 
         public ScheduleHelper(CapstonePatrol model) : base(model)
         {
+            PatrolStart = DateTime.Parse("01/01/2019");
         }
 
         public int PatrolId
@@ -80,12 +81,12 @@ namespace PatrolScheduler.Helpers
                         yield return "Start date cannot be after end date";
                     }
                     break;
-                //case nameof(PatrolEnd):
-                //    if (String.IsNullOrWhiteSpace(PatrolEnd))
-                //    {
-                //        yield return "Last Name is required";
-                //    }
-                //    break;
+                case nameof(PatrolEnd):
+                    if (PatrolStart > PatrolEnd)
+                    {
+                        yield return "End date cannot be before start date";
+                    }
+                    break;
 
             }
         }

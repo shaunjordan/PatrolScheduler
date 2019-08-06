@@ -82,6 +82,7 @@ namespace PatrolScheduler.ViewModels.EmployeeViewModels
             if (Employee.EmployeeId == 0)
             {
                 Employee.FirstName = "";
+                Employee.LastName = "";
             }
         }
 
